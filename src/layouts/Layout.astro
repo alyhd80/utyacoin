@@ -1,22 +1,183 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/utya-logo.png" type="image/x-icon" />
+    <title>TON UTYA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet" />
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+    <style>
+      html,
+      body {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background-color: #0ca0d9;
+        font-family: 'Fredoka One', cursive, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #ripple-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        pointer-events: none;
+      }
+
+      #loading {
+        position: fixed;
+        inset: 0;
+        background-color: #0ca0d9;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 2000;
+      }
+
+      #loading-content {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      #loading-content img {
+        width: 200px;
+        height: auto;
+      }
+
+      #loading-content span {
+        font-size: 24px;
+        font-weight: 600;
+        color: white;
+        white-space: nowrap;
+      }
+
+      #content {
+        position: relative;
+        z-index: 1;
+        opacity: 0;
+        transform: translateY(100%);
+        transition: opacity 0.7s ease, transform 0.7s ease;
+        font-size: 48px;
+        color: white;
+      }
+
+      #content.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @keyframes slideUpFadeOut {
+        0% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(-100%);
+        }
+      }
+
+      #loading.animate-out {
+        animation: slideUpFadeOut 0.7s forwards;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="loading">
+      <div id="loading-content">
+        <img src="utya-welcome.gif" alt="Loading..." />
+        <span>Loading the future of TON with UTYA...</span>
+      </div>
+    </div>
+
+    <canvas id="ripple-canvas"></canvas>
+
+    <div id="content">
+      utya main site
+    </div>
+
+    <script>
+      window.addEventListener("load", () => {
+        const loading = document.getElementById("loading");
+        const content = document.getElementById("content");
+
+        setTimeout(() => {
+          if (!loading || !content) return;
+
+          loading.classList.add("animate-out");
+
+          loading.addEventListener(
+            "animationend",
+            () => {
+              loading.style.display = "none";
+              content.classList.add("visible");
+            },
+            { once: true }
+          );
+        }, 2000);
+      });
+
+      const canvas = document.getElementById("ripple-canvas");
+      if (!(canvas instanceof HTMLCanvasElement)) throw new Error("Canvas element not found");
+
+      const ctx = canvas.getContext("2d");
+      if (!ctx) throw new Error("2D context not supported");
+
+      const ripples = [];
+
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+
+      resizeCanvas();
+      window.addEventListener("resize", resizeCanvas);
+
+      let lastRippleTime = 0;
+      const rippleInterval = 100;
+
+      document.addEventListener("mousemove", (e) => {
+        const now = Date.now();
+        if (now - lastRippleTime > rippleInterval) {
+          ripples.push({
+            x: e.clientX,
+            y: e.clientY,
+            radius: 0,
+            alpha: 0.25,
+          });
+          lastRippleTime = now;
+        }
+      });
+
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        for (let i = ripples.length - 1; i >= 0; i--) {
+          const r = ripples[i];
+          r.radius += 1;
+          r.alpha -= 0.002;
+
+          if (r.alpha <= 0) {
+            ripples.splice(i, 1);
+          } else {
+            ctx.beginPath();
+            ctx.arc(r.x, r.y, r.radius, 0, Math.PI * 2);
+            ctx.strokeStyle = `rgba(255, 255, 255, ${r.alpha})`;
+            ctx.lineWidth = 1.2;
+            ctx.stroke();
+          }
+        }
+
+        requestAnimationFrame(animate);
+      }
+
+      animate();
+    </script>
+  </body>
+</html>
