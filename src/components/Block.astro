@@ -1,0 +1,32 @@
+---
+export interface Props {
+  id: number;
+  title: string;
+  description?: string;
+}
+const { id, title, description } = Astro.props;
+---
+
+<style>
+  .block {
+    background: rgba(255 255 255 / 0.1);
+    border: 1px solid white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 15px;
+    color: white;
+  }
+  .block h3 {
+    margin: 0 0 10px 0;
+  }
+  .block p {
+    margin: 0;
+    font-size: 16px;
+    opacity: 0.8;
+  }
+</style>
+
+<div class="block" id={`block-${id}`}>
+  <h3>{title}</h3>
+  {description && <p>{description}</p>}
+</div>
