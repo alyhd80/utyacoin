@@ -1,0 +1,90 @@
+---
+const { 
+  title = "Intro Utya", 
+  description = "Utya یک میم کوین منحصربفرد است که با استیکرهای تلگرام و NFT‌های جذاب ترکیب شده.", 
+  gifSrc = "/haha-utya.gif" 
+} = Astro.props;
+---
+
+<style>
+  .block-1-widget {
+    display: flex;
+    flex-wrap: wrap;
+    background: rgba(255 255 255 / 0.1);
+    border-radius: 16px;
+    padding: 32px;
+    margin: 24px auto;
+    max-width: 900px;
+    color: white;
+    box-shadow: 0 0 15px rgba(0,160,217,0.5);
+    font-family: 'Fredoka One', cursive, sans-serif;
+  }
+
+  .block-1-widget .content {
+    flex: 1 1 400px;
+    padding-right: 24px;
+  }
+
+  .block-1-widget h2 {
+    font-size: 3rem;
+    margin-bottom: 16px;
+  }
+
+  .block-1-widget p {
+    font-size: 1.4rem;
+    line-height: 1.5;
+    margin-bottom: 24px;
+  }
+
+  .block-1-widget button {
+    background-color: #00a0d9;
+    border: none;
+    padding: 14px 32px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: white;
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .block-1-widget button:hover {
+    background-color: #0078b5;
+  }
+
+  .block-1-widget .gif-container {
+    flex: 1 1 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+      background: transparent; /* اضافه شده */
+
+  }
+
+  .block-1-widget .gif-container img {
+    max-width: 100%;
+    border-radius: 16px;
+  
+  }
+
+  /* ریسپانسیو: در موبایل ستون‌ها زیر هم باشند */
+  @media (max-width: 768px) {
+    .block-1-widget {
+      flex-direction: column;
+    }
+    .block-1-widget .content {
+      padding-right: 0;
+      margin-bottom: 24px;
+    }
+  }
+</style>
+
+<div class="block-1-widget" role="region" aria-label="Intro Utya widget">
+  <div class="content">
+    <h2>{title}</h2>
+    <p>{description}</p>
+  </div>
+  <div class="gif-container">
+    <img src={gifSrc} alt="Funny Utya GIF" />
+  </div>
+</div>

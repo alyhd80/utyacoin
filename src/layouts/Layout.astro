@@ -1,30 +1,15 @@
 ---
 import Header from '../components/Header.astro';
 import Block from '../components/Block.astro';
+import Block1Widget from '../components/block-1-widget.astro';
+
+
 
 const blocks = [
-  { id: 1, title: 'Block 1', description: 'This is block number 1.' },
-  { id: 2, title: 'Block 2', description: 'This is block number 2.' },
-  { id: 3, title: 'Block 3', description: 'This is block number 3.' },
-  { id: 4, title: 'Block 4', description: 'This is block number 4.' },
-  { id: 5, title: 'Block 5', description: 'This is block number 5.' },
-  { id: 6, title: 'Block 6', description: 'This is block number 6.' },
-  { id: 7, title: 'Block 7', description: 'This is block number 7.' },
-  { id: 8, title: 'Block 8', description: 'This is block number 8.' },
-  { id: 9, title: 'Block 9', description: 'This is block number 9.' },
-  { id: 10, title: 'Block 10', description: 'This is block number 10.' },
-  { id: 11, title: 'Block 11', description: 'This is block number 11.' },
-  { id: 12, title: 'Block 12', description: 'This is block number 12.' },
-  { id: 13, title: 'Block 13', description: 'This is block number 13.' },
-  { id: 14, title: 'Block 14', description: 'This is block number 14.' },
-  { id: 15, title: 'Block 15', description: 'This is block number 15.' },
+  { id: 1, Component: Block1Widget },
+
 ];
-
-
-
 ---
-
-
 
 <html lang="en">
   <head>
@@ -37,14 +22,40 @@ const blocks = [
       rel="stylesheet"
     />
     <style>
-      html, body {
-        margin: 0;
-        width: 100%;
-        height: 100%;
-        overflow: outo;
-        background-color: #0ca0d9;
-        font-family: 'Fredoka One', cursive, sans-serif;
-      }
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: 'Fredoka One', cursive, sans-serif;
+  position: relative;
+  z-index: 0;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: url('/utya-background.jpg') no-repeat center center;
+  background-size: cover;
+  filter: blur(6px);
+  z-index: -2;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 160, 217, 0.5); 
+  z-index: -1;
+}
 
       #loading {
         position: fixed;
@@ -77,12 +88,12 @@ const blocks = [
       #content {
         position: relative;
         z-index: 1;
-     opacity: 1; /* محتوا از اول کاملا دیده شود */
-  transform: translateY(0); /* هیچ جابجایی نداشته باشد */
+        opacity: 1;
+        transform: translateY(0);
         transition: opacity 0.7s ease, transform 0.7s ease;
         font-size: 48px;
         color: white;
-        padding: 80px 20px 20px 20px; /* جا برای هدر */
+        padding: 20px 20px 20px 20px;
         min-height: 100vh;
         box-sizing: border-box;
       }
@@ -130,9 +141,9 @@ const blocks = [
 
     <canvas id="ripple-canvas"></canvas>
 
-  <div id="content">
-      {blocks.map(block => (
-        <Block key={block.id} id={block.id} title={block.title} description={block.description} />
+    <div id="content">
+      {blocks.map(({ id, Component }) => (
+        <Component key={id} />
       ))}
     </div>
 
@@ -150,14 +161,16 @@ const blocks = [
             () => {
               loading.style.display = "none";
               content.classList.add("visible");
-              header.classList.add("visible"); // نمایش هدر با انیمیشن
+              header.classList.add("visible");
+
+          
             },
             { once: true }
           );
         }, 2000);
       });
 
-      // Ripple canvas code (همون قبلی)
+      // 🎯 Ripple canvas animation
       const canvas = document.getElementById("ripple-canvas");
       if (!(canvas instanceof HTMLCanvasElement))
         throw new Error("Canvas element not found");
