@@ -1,28 +1,45 @@
 ---
 const { 
   title = "INTRODUCING", 
-  description = `Utya is a unique meme coin created by the talented designer Egor Zhgun, born on April 17th, 2020. Since its inception, Utya has combined the viral power of Telegram stickers and the emerging NFT culture to form an innovative digital asset ecosystem. The original Utya artwork was first revealed on Behance, which you can explore 
-<a href="https://www.behance.net/gallery/93658133/Utya-Duck-Telegram-Stickers?locale=en_US" target="_blank" rel="noopener noreferrer" style="color: #ffd527;">here</a>. 
-Moreover, the official Telegram website 
-<a href="https://telegram.org/" target="_blank" rel="noopener noreferrer" style="color: #ffd527;">hosts a wide collection of Utya stickers</a> that showcase its integral role in Telegram’s vibrant meme culture. Utya continues to grow as a beloved digital icon and a thriving community within the blockchain ecosystem.`,
+  description = `Utya isn’t just a meme coin , it’s the soul of Telegram’s sticker culture!  
+Born from the mind of legendary designer Egor Zhgun in 2020, this yellow duck has flown beyond memes and into the world of NFTs.  
+Want proof? Check out the original art <a href="https://www.behance.net/gallery/93658133/Utya-Duck-Telegram-Stickers?locale=en_US" target="_blank" rel="noopener noreferrer" style="color: #ffd527;">here on Behance</a> , and dive into <a href="https://t.me/addstickers/UtyaDuck" target="_blank" rel="noopener noreferrer" style="color: #ffd527;">Utya’s sticker</a> world  
+right on <a href="https://telegram.org/" target="_blank" rel="noopener noreferrer" style="color: #ffd527;">Telegram</a>.  
+Today, Utya is more than just cute , it's a movement.
+`,
   gifSrc = "/haha-utya.gif" 
 } = Astro.props;
 ---
 
 <style>
-  .block-1-widget {
-    display: flex;
-    background: rgba(255 255 255 / 0.1);
-    border-radius: 16px;
-    padding: 32px;
-    margin: 24px auto;
-    max-width: 900px;
-    color: white;
-    box-shadow: 0 0 15px rgba(0,160,217,0.5);
-    font-family: 'Fredoka One', cursive, sans-serif;
-    min-height: 400px;
-  }
+.block-1-widget {
+  display: flex;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.05),
+    rgba(255, 255, 255, 0.05)
+  );
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 24px 48px; 
+  margin: 24px auto;
+  max-width: 1100px;
+  min-height: 500px;
+  color: white;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  font-family: 'Fredoka One', cursive, sans-serif;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
 
+
+.block-1-widget .description a {
+  color: #ffd527;
+  text-decoration: none;
+}
+.block-1-widget .description a:hover {
+  opacity: 0.8;
+}
   .block-1-widget .content {
     flex: 1 1 50%;
     padding-right: 24px;
@@ -40,26 +57,31 @@ Moreover, the official Telegram website
   }
 
   .block-1-widget .intro-intro {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     color: rgba(141, 82, 193, 1);
   }
 
   .block-1-widget .intro-name {
-    font-size: 4rem;
+    font-size: 3rem;
     color: rgba(255, 213, 39, 1);
     margin-top: 8px;
   }
 
   .block-1-widget .intro-tagline {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     margin-top: 8px;
     color: rgba(141, 82, 193, 1);
   }
 
-  .block-1-widget p {
-    font-size: 1.4rem;
-    line-height: 1.5;
+  .block-1-widget .description {
+    font-size: 1.1rem;
+    line-height: 1.6;
     margin-bottom: 24px;
+  }
+
+  .block-1-widget .description a {
+    color: #ffd527;
+    text-decoration: underline;
   }
 
   .block-1-widget .gif-container {
@@ -72,6 +94,9 @@ Moreover, the official Telegram website
 
   .block-1-widget .gif-container img {
     max-width: 100%;
+    width: 100%;
+    max-height: 100%;
+    object-fit: contain;
     border-radius: 16px;
   }
 
@@ -96,7 +121,7 @@ Moreover, the official Telegram website
       <div class="intro-name">UTYA</div>
       <div class="intro-tagline">The Face of Telegram’s Meme Culture</div>
     </h2>
-    <p class={description}></p>
+    <div class="description" set:html={description}></div>
   </div>
   <div class="gif-container">
     <img src={gifSrc} alt="Funny Utya GIF" />

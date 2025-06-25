@@ -1,0 +1,191 @@
+---
+const {
+  title = "UTYA",
+  subtitle = "The Duck Everyone Knew, But No One Named",
+  
+} = Astro.props;
+---
+
+<style>
+.black-4-widget {
+  max-width: 1200px;
+  margin: 48px auto;
+  color: white;
+  font-family: 'Fredoka One', cursive, sans-serif;
+  text-align: center;
+}
+
+.black-4-widget h2 {
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+.black-4-widget .subtitle {
+  font-size: 1.1rem;
+  color: white;
+  margin-bottom: 24px;
+}
+
+.black-4-widget .card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05));
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  padding: 24px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  margin-top: 32px;
+  text-align: left;
+  user-select: none;
+}
+
+.black-4-widget .card img {
+  max-width: 100%;
+  border-radius: 16px;
+  margin-bottom: 16px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.black-4-widget .card-content {
+  font-size: 1.2rem;
+  font-weight: bold;
+  line-height: 1.6;
+  color: #FFD700; /* رنگ زرد طلایی */
+  text-align: center;
+}
+
+/* بخش جدید برای توضیح utaya کیه */
+.utya-info {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-top: 48px;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+  font-size: 1.1rem;
+  color: #eee;
+}
+
+.utya-info img {
+  width: 10rem; 
+  border-radius: 16px;
+}
+
+.utya-info-text {
+  flex: 1;
+  font-family: 'Fredoka One', cursive, sans-serif;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .black-4-widget h2 {
+    font-size: 1.5rem;
+  }
+  .utya-info {
+    flex-direction: column;
+    text-align: center;
+  }
+  .utya-info img {
+    width: 80%;
+    max-width: 300px;
+    margin-bottom: 24px;
+  }
+}
+</style>
+
+<div class="black-4-widget">
+  <h2>{title}</h2>
+  <div class="subtitle">{subtitle}</div>
+
+  <div class="card">
+    <img src="/about-utya.gif" alt="About Utya" />
+    <div class="card-content">
+      Who's Utya?
+    </div>
+
+      <div class="utya-info">
+<div class="utya-info-text">
+  Utya is that little duck on Telegram everyone knows, even if they don’t really know his name.  
+  Whenever you search for something and come up empty,  
+  he’s the one who shows up to keep things fun.  
+  More than just a sticker, Utya has become a symbol of the playful and friendly vibe of Telegram.
+</div>
+
+    <img src="/utya-searcher.gif" alt="Utya Searcher" />
+  </div>
+
+
+
+    <div class="utya-info">
+      <div class="utya-info-text">
+        Even Utya knows it’s good to let go of the old.  
+        When your app data starts piling up, or storage feels heavy,  
+        just give things a little refresh — and guess who’s there with a broom and a wink?  
+        Yup, it’s Utya.  
+        Clearing space never looked this cute.
+      </div>
+
+      <img src="/utya-cleaner.gif" alt="Utya Cleaning" />
+  </div>
+
+    <div class="utya-info">
+<div class="utya-info-text">
+  When you enter auto-delete mode Utya appears with a friendly hello note  
+  reminding you that even messages deserve a graceful farewell  
+  More than just cute he’s your little helper making sure your chats stay fresh and clutter free  
+  Always there with a smile and a wave making tidying up feel easy and pleasant
+</div>
+
+
+      <img src="/hello-utya.gif" alt="Utya Cleaning" />
+  </div>
+  
+   <div class="utya-info">
+<div class="utya-info-text">
+  When you lock your app, Utya makes sure your Telegram stays just yours.  
+  So if someone borrows your phone, your chats stay private and secure.  
+  Only you can unlock and dive back in.
+</div>
+      <img src="/utya-lock.gif" alt="Utya Cleaning" />
+  </div>
+
+<div class="utya-info">
+  <div class="utya-info-text">
+    The very first time you open Telegram, something magical happens — <strong>Utya hatches from his little egg</strong> with a cheerful quack just to welcome you!  
+    He’s not just adorable — he’s your playful guide to help you explore, chat, and make Telegram feel like home from the very first tap.  
+    With Utya by your side, every message starts with a smile and a splash of fun!
+  </div>
+  <img src="utya-egg.gif" alt="Utya Hatching from Egg" />
+</div>
+
+
+
+<div class="utya-info">
+<div class="utya-info-text">
+  The moment you open Telegram for the first time, Utya is there to welcome you with a friendly quack!  
+  He’s your quirky guide, ready to help you explore, chat, and connect like never before.  
+  With Utya by your side, your Telegram journey starts with a smile and a splash of fun!
+</div>
+      <img src="utya-detection.gif" alt="Utya Cleaning" />
+</div>
+
+
+<div class="utya-info">
+  <div class="utya-info-text">
+    When you’re about to invite your friends to Telegram, Utya is the first to crash the party!  
+    With his playful grin and friendly quack, he reminds everyone that this hangout is about to get fun and unforgettable.  
+    When Utya joins the crew, you know the good times have just begun!
+  </div>
+  <img src="utya-invite.gif" alt="Utya Joining the Party" />
+</div>
+
+
+
+
+
+  </div>
+
+

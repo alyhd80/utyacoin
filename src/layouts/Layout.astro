@@ -1,12 +1,19 @@
 ---
 import Header from '../components/Header.astro';
-import Block from '../components/Block.astro';
 import Block1Widget from '../components/block-1-widget.astro';
-
-
+import Block2Widget from '../components/block-2-widget.astro';
+import Block3Widget from '../components/block-3-widget.astro';
+import Block4Widget from '../components/block-4-widget.astro';
+import Block5Widget from '../components/block-5-widget.astro';
 
 const blocks = [
   { id: 1, Component: Block1Widget },
+  { id: 2, Component: Block2Widget },
+  { id: 3, Component: Block3Widget },
+    { id: 2, Component: Block2Widget },
+    { id: 4, Component: Block4Widget },
+    { id: 2, Component: Block2Widget },
+    { id: 5, Component: Block5Widget },
 
 ];
 ---
@@ -22,40 +29,41 @@ const blocks = [
       rel="stylesheet"
     />
     <style>
-html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  font-family: 'Fredoka One', cursive, sans-serif;
-  position: relative;
-  z-index: 0;
-  overflow-x: hidden;
-}
+      html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        font-family: 'Fredoka One', cursive, sans-serif;
+        position: relative;
+        z-index: 0;
+        overflow-x: hidden;
+        background: transparent;
+      }
 
-body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: url('/utya-background.jpg') no-repeat center center;
-  background-size: cover;
-  filter: blur(6px);
-  z-index: -2;
-}
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: url('/utya-background.jpg') no-repeat center center;
+        background-size: cover;
+        filter: blur(6px);
+        z-index: -2;
+      }
 
-body::after {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 160, 217, 0.5); 
-  z-index: -1;
-}
+      body::after {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 160, 217, 0.5);
+        z-index: -1;
+      }
 
       #loading {
         position: fixed;
@@ -67,33 +75,35 @@ body::after {
         z-index: 2000;
       }
 
-      #loading-content {
-        display: flex;
-        align-items: center;
-        gap: 20px;
-      }
 
-      #loading-content img {
-        width: 200px;
-        height: auto;
-      }
+#loading-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px; 
+}
 
-      #loading-content span {
-        font-size: 24px;
-        font-weight: 600;
-        color: white;
-        white-space: nowrap;
-      }
+#loading-content img {
+  width: 200px;
+  height: auto;
+}
 
+#loading-content span {
+font-size: 4vw;
+  font-weight: 600;
+  color: white;
+  white-space: nowrap;
+  text-align: center; 
+}
       #content {
         position: relative;
         z-index: 1;
-        opacity: 1;
-        transform: translateY(0);
+        opacity: 0;
+        transform: translateY(10px);
         transition: opacity 0.7s ease, transform 0.7s ease;
         font-size: 48px;
         color: white;
-        padding: 20px 20px 20px 20px;
+        padding: 20px;
         min-height: 100vh;
         box-sizing: border-box;
       }
@@ -101,6 +111,17 @@ body::after {
       #content.visible {
         opacity: 1;
         transform: translateY(0);
+      }
+
+      #main-header {
+        position: relative;
+        z-index: 10;
+        opacity: 0;
+        transition: opacity 0.7s ease;
+      }
+
+      #main-header.visible {
+        opacity: 1;
       }
 
       @keyframes slideUpFadeOut {
@@ -134,7 +155,7 @@ body::after {
 
     <div id="loading">
       <div id="loading-content">
-        <img src="utya-welcome.gif" alt="Loading..." />
+        <img src="/utya-welcome.gif" alt="Loading..." />
         <span>Loading the future of TON with UTYA...</span>
       </div>
     </div>
@@ -162,15 +183,13 @@ body::after {
               loading.style.display = "none";
               content.classList.add("visible");
               header.classList.add("visible");
-
-          
             },
             { once: true }
           );
-        }, 2000);
+        }, 1000);///timer
       });
 
-      // 🎯 Ripple canvas animation
+      // Ripple canvas animation
       const canvas = document.getElementById("ripple-canvas");
       if (!(canvas instanceof HTMLCanvasElement))
         throw new Error("Canvas element not found");
@@ -227,6 +246,10 @@ body::after {
       }
 
       animate();
+
+      // document.addEventListener("contextmenu", (e) => {
+      //   e.preventDefault();
+      // });
     </script>
   </body>
 </html>

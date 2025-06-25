@@ -1,0 +1,86 @@
+---
+const tokenAddress = 'EQBaCgUwOoc6gHCNln_oJzb0mVs79YG7wYoavh-o1ItaneLA';
+const explorerUrl = `https://tonviewer.com/${tokenAddress}`;
+const chartUrl = `https://dexscreener.com/ton/${tokenAddress}`;
+---
+
+<div style="
+  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 20px;
+  padding: 32px;
+  margin: 40px auto;
+  max-width: 1125px;
+  color: white;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  font-family: 'Fredoka One', cursive, sans-serif;
+">
+  <div style="display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 20px;">
+    <img src="/utya-egg.gif" alt="UTYA Egg" style="width: 60px; height: auto;" />
+    <h2 style="font-size: 40px; margin: 0;">Official UTYA Token</h2>
+  </div>
+
+  <p style="
+    font-size: 20px;
+    word-break: break-all;
+    background: rgba(255,255,255,0.1);
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+  ">
+    {tokenAddress}
+  </p>
+
+  <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 16px;">
+    <a 
+      onclick="navigator.clipboard.writeText('{tokenAddress}').then(() => document.getElementById('utyaSound').play())"
+      style="
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        border-radius: 10px;
+        background: white;
+        color: #0ca0d9;
+        cursor: pointer;
+      "
+    >
+      📋 Copy
+    </a>
+
+ <a 
+  href="javascript:void(0);" 
+  onclick="document.getElementById('utyaSound').currentTime=0; document.getElementById('utyaSound').play(); window.open('https://tonviewer.com/EQBaCgUwOoc6gHCNln_oJzb0mVs79YG7wYoavh-o1ItaneLA', '_blank', 'noopener');" 
+  style="
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 10px;
+    background: white;
+    color: #0ca0d9;
+    text-decoration: none;
+    cursor: pointer;
+  "
+>
+  🔍 View on TON Viewer
+</a>
+
+<a 
+  href="javascript:void(0);" 
+  onclick="document.getElementById('utyaSound').currentTime=0; document.getElementById('utyaSound').play(); window.open('https://dexscreener.com/ton/EQBaCgUwOoc6gHCNln_oJzb0mVs79YG7wYoavh-o1ItaneLA', '_blank', 'noopener');" 
+  style="
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 10px;
+    background: white;
+    color: #0ca0d9;
+    text-decoration: none;
+    cursor: pointer;
+  "
+>
+  📈 DEXScreener Chart
+</a>
+  </div>
+</div>
+
+<audio id="utyaSound" src="/utya-sound.mp3" preload="auto"></audio>
