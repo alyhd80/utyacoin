@@ -7,21 +7,21 @@ import Block4Widget from '../components/block-4-widget.astro';
 import Block5Widget from '../components/block-5-widget.astro';
 import Block6Widget from '../components/block-6-widget.astro';
 import Block7Widget from '../components/block-7-widget.astro';
+import Block8Widget from '../components/block-8-widget.astro';
+import Block9Widget from '../components/block-9-widget.astro';
+import Block10Widget from '../components/block-10-widget.astro';
 
 const blocks = [
   { id: 1, Component: Block1Widget },
   { id: 2, Component: Block2Widget },
   { id: 3, Component: Block3Widget },
-    { id: 2, Component: Block2Widget },
-    { id: 4, Component: Block4Widget },
-    { id: 2, Component: Block2Widget },
-    { id: 5, Component: Block5Widget },
-      { id: 2, Component: Block2Widget },
-
-    { id: 6, Component: Block6Widget },
-  { id: 2, Component: Block2Widget },
+  { id: 4, Component: Block4Widget },
+  { id: 5, Component: Block5Widget },
+  { id: 6, Component: Block6Widget },
   { id: 7, Component: Block7Widget },
-
+  { id: 8, Component: Block8Widget },
+  { id: 9, Component: Block9Widget },
+  { id: 10, Component: Block10Widget },
 ];
 ---
 
@@ -31,10 +31,7 @@ const blocks = [
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href="/utya-logo.png" type="image/x-icon" />
     <title>TON UTYA</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet" />
     <style>
       html, body {
         margin: 0;
@@ -42,8 +39,6 @@ const blocks = [
         width: 100%;
         height: 100%;
         font-family: 'Fredoka One', cursive, sans-serif;
-        position: relative;
-        z-index: 0;
         overflow-x: hidden;
         background: transparent;
       }
@@ -51,25 +46,29 @@ const blocks = [
       body::before {
         content: "";
         position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
+        inset: 0;
         background: url('/utya-background.jpg') no-repeat center center;
         background-size: cover;
         filter: blur(6px);
         z-index: -2;
+        transition: background-image 1s ease-in-out;
+      }
+
+      body.background-alt::before {
+        background-image: url('/utya-background-2.jpg');
       }
 
       body::after {
         content: "";
         position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
+        inset: 0;
         background-color: rgba(0, 160, 217, 0.5);
         z-index: -1;
+        transition: background-color 1s ease-in-out;
+      }
+
+      body.background-alt::after {
+        background-color: rgba(0, 80, 140, 0.4);
       }
 
       #loading {
@@ -82,26 +81,27 @@ const blocks = [
         z-index: 2000;
       }
 
+      #loading-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+      }
 
-#loading-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px; 
-}
+      #loading-content #lottie-loading {
+        width: 200px;
+        height: 200px;
+        margin: 0 auto;
+      }
 
-#loading-content img {
-  width: 200px;
-  height: auto;
-}
+      #loading-content span {
+        font-size: 4vw;
+        font-weight: 600;
+        color: white;
+        white-space: nowrap;
+        text-align: center;
+      }
 
-#loading-content span {
-font-size: 4vw;
-  font-weight: 600;
-  color: white;
-  white-space: nowrap;
-  text-align: center; 
-}
       #content {
         position: relative;
         z-index: 1;
@@ -162,7 +162,7 @@ font-size: 4vw;
 
     <div id="loading">
       <div id="loading-content">
-        <img src="/utya-welcome.gif" alt="Loading..." />
+        <div id="lottie-loading"></div>
         <span>Loading the future of TON with UTYA...</span>
       </div>
     </div>
@@ -170,12 +170,29 @@ font-size: 4vw;
     <canvas id="ripple-canvas"></canvas>
 
     <div id="content">
-      {blocks.map(({ id, Component }) => (
-        <Component key={id} />
-      ))}
+      {
+        blocks.map(({ id, Component }) => (
+          <div data-block-id={id} key={id}>
+            <Component />
+          </div>
+        ))
+      }
     </div>
 
+    <!-- Lottie JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.10.2/lottie.min.js"></script>
+
     <script type="module">
+      // Load Lottie animation for loading screen
+      const lottieLoadingContainer = document.getElementById('lottie-loading');
+      const loadingAnimation = lottie.loadAnimation({
+        container: lottieLoadingContainer,
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: '/utya-welcome.json', // مسیر فایل JSON انیمیشن
+      });
+
       window.addEventListener("load", () => {
         const loading = document.getElementById("loading");
         const content = document.getElementById("content");
@@ -183,27 +200,21 @@ font-size: 4vw;
 
         setTimeout(() => {
           loading.classList.add("animate-out");
-
           loading.addEventListener(
             "animationend",
             () => {
               loading.style.display = "none";
               content.classList.add("visible");
               header.classList.add("visible");
+              loadingAnimation.destroy(); // پاک کردن انیمیشن لودینگ
             },
             { once: true }
           );
-        }, 0);///timer
+        }, 0);
       });
 
-      // Ripple canvas animation
       const canvas = document.getElementById("ripple-canvas");
-      if (!(canvas instanceof HTMLCanvasElement))
-        throw new Error("Canvas element not found");
-
       const ctx = canvas.getContext("2d");
-      if (!ctx) throw new Error("2D context not supported");
-
       const ripples = [];
 
       function resizeCanvas() {
@@ -220,17 +231,12 @@ font-size: 4vw;
       document.addEventListener("mousemove", (e) => {
         const now = Date.now();
         if (now - lastRippleTime > rippleInterval) {
-          ripples.push({
-            x: e.clientX,
-            y: e.clientY,
-            radius: 0,
-            alpha: 0.25,
-          });
+          ripples.push({ x: e.clientX, y: e.clientY, radius: 0, alpha: 0.25 });
           lastRippleTime = now;
         }
       });
 
-      function animate() {
+      function animateRipples() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         for (let i = ripples.length - 1; i >= 0; i--) {
@@ -249,14 +255,32 @@ font-size: 4vw;
           }
         }
 
-        requestAnimationFrame(animate);
+        requestAnimationFrame(animateRipples);
       }
 
-      animate();
+      animateRipples();
 
-      // document.addEventListener("contextmenu", (e) => {
-      //   e.preventDefault();
-      // });
+      document.addEventListener("contextmenu", (e) => e.preventDefault());
+
+      function observeBlock9() {
+        const block9 = document.querySelector('[data-block-id="9"]');
+        if (!block9) return;
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            const entry = entries[0];
+            if (entry.isIntersecting) {
+              document.body.classList.add('background-alt');
+            } else {
+              document.body.classList.remove('background-alt');
+            }
+          },
+          { threshold: 0.5 }
+        );
+
+        observer.observe(block9);
+      }
+      observeBlock9();
     </script>
   </body>
 </html>

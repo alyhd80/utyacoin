@@ -1,0 +1,136 @@
+<div id="utya-friend-section" style="
+  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 24px;
+  margin: 60px auto;
+  max-width: 1200px;
+  color: white;
+  text-align: center;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+  font-family: 'Fredoka One', cursive, sans-serif;
+  padding: 40px 0;
+">
+  <h2 style="font-size: 46px; margin-bottom: 18px; font-weight: 900; letter-spacing: 1.6px;padding: 0 40px;">
+    Does UTYA Have Friends? Oh, you bet!
+  </h2>
+
+  <p style="font-size: 20px; max-width: 700px; margin: 0 auto; line-height: 1.6; color: #FFD700;padding: 0 40px;">
+    Meet <strong style="color: #FFD700;">Pengu</strong>. Yeah, that cool penguin meme you know. He’s UTYA’s best bud on TON. Together, they’re up to all sorts of wild stuff that’ll make you smile and say, “Wow, that’s next-level!”
+  </p>
+
+  <div id="utya-friend-scroll" style="margin-top: 40px;">
+    <div class="friend-card" id="utya-lottie-0"></div>
+    <div class="friend-card" id="utya-lottie-1"></div>
+    <div class="friend-card" id="utya-lottie-2"></div>
+    <div class="friend-card" id="utya-lottie-3"></div>
+    <div class="friend-card" id="utya-lottie-4"></div>
+<div class="friend-card" id="utya-lottie-5"></div>
+
+  </div>
+</div>
+
+<style>
+#utya-friend-scroll {
+  display: flex;
+  overflow-x: auto;
+  gap: 24px;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 12px;
+  -webkit-overflow-scrolling: touch;
+  cursor: grab;
+  user-select: none;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+#utya-friend-scroll::-webkit-scrollbar {
+  display: none;
+}
+#utya-friend-scroll.dragging {
+  cursor: grabbing;
+}
+.friend-card {
+  flex: 0 0 auto;
+  width: 220px;
+  height: 220px;
+  border-radius: 16px;
+  scroll-snap-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+</style>
+
+<!-- Lottie Web -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.10.2/lottie.min.js"></script>
+
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+  const animations = [
+
+
+
+    { id: 'utya-lottie-0', path: '/utya-friend-2.json' },
+
+
+
+    { id: 'utya-lottie-1', path: '/utya-friend-3.json' },
+
+    { id: 'utya-lottie-3', path: '/utya-friend-1.json' },
+        { id: 'utya-lottie-2', path: '/utya-friend-0.json' },
+        { id: 'utya-lottie-4', path: '/pengu-coin.json' },
+        { id: 'utya-lottie-5', path: '/utya-coin.json' },
+
+
+
+
+  ];
+
+  // Load all Lottie animations immediately
+  animations.forEach(({ id, path }) => {
+    const container = document.getElementById(id);
+    if (container) {
+      lottie.loadAnimation({
+        container,
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path
+      });
+    }
+  });
+
+  // Drag-to-scroll
+  const scrollEl = document.getElementById('utya-friend-scroll');
+  let isDown = false, startX, scrollLeft;
+
+  scrollEl.addEventListener('mousedown', e => {
+    isDown = true;
+    scrollEl.classList.add('dragging');
+    startX = e.pageX - scrollEl.offsetLeft;
+    scrollLeft = scrollEl.scrollLeft;
+  });
+  scrollEl.addEventListener('mouseleave', () => {
+    isDown = false;
+    scrollEl.classList.remove('dragging');
+  });
+  scrollEl.addEventListener('mouseup', () => {
+    isDown = false;
+    scrollEl.classList.remove('dragging');
+  });
+  scrollEl.addEventListener('mousemove', e => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - scrollEl.offsetLeft;
+    scrollEl.scrollLeft = scrollLeft - (x - startX) * 1.5;
+  });
+
+  // Wheel scroll for desktop
+  scrollEl.addEventListener('wheel', e => {
+    if (window.innerWidth >= 768 && Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+      e.preventDefault();
+      scrollEl.scrollLeft += e.deltaY * 1.2;
+    }
+  }, { passive: false });
+});
+</script>

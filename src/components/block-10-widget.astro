@@ -1,0 +1,151 @@
+<!-- How to Buy Section Start -->
+<div id="how-to-buy-section" style="
+  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 24px;
+  margin: 60px auto;
+  max-width: 1200px;
+  color: white;
+  text-align: center;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+  font-family: 'Fredoka One', cursive, sans-serif;
+  padding: 40px 0;
+">
+
+  <h2 style="font-size: 46px; margin-bottom: 18px; font-weight: 900; letter-spacing: 1.6px;">
+    How to Buy UTYA?
+  </h2>
+
+  <p style="font-size: 20px; max-width: 700px; margin: 0 auto 40px; line-height: 1.6; color: #FFD700;">
+    Follow these simple steps to get your very own UTYA tokens and join the fun on TON blockchain!
+  </p>
+
+  <div id="how-to-buy-scroll" style="margin-top: 20px; padding: 0 24px;">
+    <!-- Each step card -->
+    <div class="step-card">
+      <div class="step-number">1</div>
+      <div class="step-content">
+        <h3 class="step-title">Create a TON Wallet</h3>
+        <p class="step-description">Download and install a trusted TON wallet like Tonkeeper or Tonhub.</p>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-number">2</div>
+      <div class="step-content">
+        <h3 class="step-title">Fund Your Wallet</h3>
+        <p class="step-description">Add some TON tokens to your wallet via exchanges or transfers.</p>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-number">3</div>
+      <div class="step-content">
+        <h3 class="step-title">Connect to UTYA DEX</h3>
+        <p class="step-description">Visit the official UTYA decentralized exchange to swap TON for UTYA tokens.</p>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-number">4</div>
+      <div class="step-content">
+        <h3 class="step-title">Enjoy & Share</h3>
+        <p class="step-description">Hold your UTYA tokens and share with friends to grow the community!</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  #how-to-buy-scroll {
+    display: flex;
+    overflow-x: auto;
+    gap: 24px;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 12px;
+    -webkit-overflow-scrolling: touch;
+    cursor: grab;
+    user-select: none;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  #how-to-buy-scroll::-webkit-scrollbar {
+    display: none;
+  }
+  #how-to-buy-scroll.dragging {
+    cursor: grabbing;
+  }
+  .step-card {
+    flex: 0 0 auto;
+    width: 280px;
+    min-height: 180px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    scroll-snap-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .step-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+  }
+
+  .step-number {
+    font-size: 52px;
+    font-weight: 900;
+    color: #FFD700;
+    margin-bottom: 12px;
+    font-family: 'Fredoka One', cursive, sans-serif;
+  }
+  .step-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: white;
+  }
+  .step-description {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #fffbe0;
+  }
+</style>
+
+<script>
+  // Drag-to-scroll behavior for horizontal scroll
+  const scrollContainer = document.getElementById('how-to-buy-scroll');
+  let isDown = false, startX, scrollLeft;
+
+  scrollContainer.addEventListener('mousedown', e => {
+    isDown = true;
+    scrollContainer.classList.add('dragging');
+    startX = e.pageX - scrollContainer.offsetLeft;
+    scrollLeft = scrollContainer.scrollLeft;
+  });
+  scrollContainer.addEventListener('mouseleave', () => {
+    isDown = false;
+    scrollContainer.classList.remove('dragging');
+  });
+  scrollContainer.addEventListener('mouseup', () => {
+    isDown = false;
+    scrollContainer.classList.remove('dragging');
+  });
+  scrollContainer.addEventListener('mousemove', e => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - scrollContainer.offsetLeft;
+    scrollContainer.scrollLeft = scrollLeft - (x - startX) * 1.5;
+  });
+
+  // Wheel scroll for desktop
+  scrollContainer.addEventListener('wheel', e => {
+    if (window.innerWidth >= 768 && Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+      e.preventDefault();
+      scrollContainer.scrollLeft += e.deltaY * 1.2;
+    }
+  }, { passive: false });
+</script>

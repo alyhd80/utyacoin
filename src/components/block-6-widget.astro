@@ -9,8 +9,7 @@
   text-align: center;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
   font-family: 'Fredoka One', cursive, sans-serif;
-    padding-bottom: 40px; /* اینجا فاصله پایین اضافه شد */
-
+  padding-bottom: 40px;
 ">
   <h2 style="font-size: 44px; margin-bottom: 16px; font-weight: 900; letter-spacing: 1.5px;">
     Meet the Legendary UTYA NFT Collection
@@ -21,18 +20,22 @@
   </p>
 
   <div id="nft-scroll">
-    <!-- NFT Cards -->
-    <div class="nft-card"><img data-src="/nft-1.gif" alt="UTYA NFT 1" /></div>
-    <div class="nft-card"><img data-src="/nft-2.gif" alt="UTYA NFT 2" /></div>
-    <div class="nft-card"><img data-src="/nft-3.gif" alt="UTYA NFT 3" /></div>
-    <div class="nft-card"><img data-src="/nft-4.gif" alt="UTYA NFT 4" /></div>
-    <div class="nft-card"><img data-src="/nft-5.gif" alt="UTYA NFT 5" /></div>
-    <div class="nft-card"><img data-src="/nft-6.gif" alt="UTYA NFT 6" /></div>
-    <div class="nft-card"><img data-src="/nft-7.gif" alt="UTYA NFT 7" /></div>
-    <div class="nft-card"><img data-src="/nft-8.gif" alt="UTYA NFT 8" /></div>
-    <div class="nft-card"><img data-src="/nft-9.gif" alt="UTYA NFT 9" /></div>
-    <div class="nft-card"><img data-src="/nft-10.gif" alt="UTYA NFT 10" /></div>
-    <div class="nft-card"><img data-src="/nft-11.gif" alt="UTYA NFT 11" /></div>
+    <div class="nft-card" data-lottie-src="/nft-1.json"></div>
+    <div class="nft-card" data-lottie-src="/nft-2.json"></div>
+    <div class="nft-card" data-lottie-src="/nft-3.json"></div>
+    <div class="nft-card" data-lottie-src="/nft-4.json"></div>
+    <div class="nft-card" data-lottie-src="/nft-5.json"></div>
+    <div class="nft-card" data-lottie-src="/nft-6.json"></div>
+    <div class="nft-card" data-lottie-src="/nft-7.json"></div>
+    <div class="nft-card" data-lottie-src="/nft-8.json"></div>
+    <div class="nft-card" data-lottie-src="/nft-9.json"></div>
+    <div class="nft-card" data-lottie-src="/nft-10.json"></div>
+    <div class="nft-card" data-lottie-src="/nft-11.json"></div>
+    <div class="nft-card" data-lottie-src="/nft-12.json"></div>
+    <div class="nft-card" data-lottie-src="/nft-13.json"></div>
+    <div class="nft-card" data-lottie-src="/nft-14.json"></div>
+    <div class="nft-card" data-lottie-src="/nft-15.json"></div>
+    <div class="nft-card" data-lottie-src="/nft-16.json"></div>
   </div>
 </div>
 
@@ -67,35 +70,47 @@
   border-radius: 16px;
   overflow: hidden;
   scroll-snap-align: center;
-}
-
-.nft-card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  pointer-events: none; /* جلوگیری از کشیدن تصویر */
-  user-drag: none; /* مخصوص برخی مرورگرها */
-  -webkit-user-drag: none; /* مخصوص Safari/Chrome */
+  background: transparent;
 }
 </style>
 
+<!-- اضافه کردن لایبری Lottie -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.10.2/lottie.min.js"></script>
+
 <script>
-// Lazy Load
+// مدیریت انیمیشن‌های Lottie با IntersectionObserver
+
+const lottieCards = document.querySelectorAll('.nft-card');
+const lottiePlayers = new Map();
+
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
-    const img = entry.target;
-    if (entry.isIntersecting && !img.src) {
-      img.src = img.dataset.src;
+    const el = entry.target;
+
+    if (entry.isIntersecting) {
+      if (!lottiePlayers.has(el)) {
+        const animation = lottie.loadAnimation({
+          container: el,
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: el.dataset.lottieSrc
+        });
+        lottiePlayers.set(el, animation);
+      } else {
+        lottiePlayers.get(el).play();
+      }
+    } else {
+      if (lottiePlayers.has(el)) {
+        lottiePlayers.get(el).pause();
+      }
     }
   });
 }, { threshold: 0.5 });
 
-document.querySelectorAll('.nft-card img').forEach(img => {
-  observer.observe(img);
-});
+lottieCards.forEach(card => observer.observe(card));
 
-// Horizontal scroll with mouse wheel (desktop)
+// اسکرول افقی با چرخ موس برای دسکتاپ
 const scrollContainer = document.getElementById('nft-scroll');
 
 scrollContainer.addEventListener('wheel', function (e) {
@@ -105,7 +120,7 @@ scrollContainer.addEventListener('wheel', function (e) {
   }
 }, { passive: false });
 
-// Drag to Scroll
+// درگ برای اسکرول
 let isDown = false;
 let startX;
 let scrollLeft;
@@ -128,16 +143,7 @@ scrollContainer.addEventListener('mousemove', (e) => {
   if (!isDown) return;
   e.preventDefault();
   const x = e.pageX - scrollContainer.offsetLeft;
-  const walk = (x - startX) * 1.5; // scroll speed multiplier
+  const walk = (x - startX) * 1.5;
   scrollContainer.scrollLeft = scrollLeft - walk;
 });
-
-
-// جلوگیری از درگ شدن عکس‌ها
-document.querySelectorAll('#nft-scroll img').forEach(img => {
-  img.addEventListener('dragstart', e => e.preventDefault());
-});
-
-
 </script>
-

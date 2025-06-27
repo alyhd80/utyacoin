@@ -1,0 +1,133 @@
+<!-- UTYA Appearances Section -->
+<div style="
+  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 24px;
+  margin: 60px auto;
+  max-width: 1200px;
+  color: white;
+  text-align: center;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+  font-family: 'Fredoka One', cursive, sans-serif;
+  padding: 40px 0;
+">
+  <h2 style="font-size: 46px; margin-bottom: 18px; font-weight: 900; letter-spacing: 1.6px;">
+    Where Has UTYA Been Spotted? Let's See!
+  </h2>
+
+  <p style="font-size: 20px; max-width: 720px; margin: 0 auto; line-height: 1.6; color: #FFD700;">
+    UTYA's fame is spreading like wildfire. It's not just a meme—it's a movement. From official websites to hidden corners of the web, UTYA keeps popping up. Let's dive in!
+  </p>
+
+  <div style="display: flex; flex-direction: column; gap: 40px; align-items: center; margin-top: 40px; padding: 0 24px;">
+    
+    <!-- Telegram.org Card -->
+    <div style="
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      max-width: 800px;
+      padding: 24px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    " onmouseover="this.style.transform='scale(1.015)'; this.style.boxShadow='0 8px 30px rgba(0, 0, 0, 0.35)'" onmouseout="this.style.transform=''; this.style.boxShadow=''">
+
+      <div id="utyaLottieTelegram" style="width: 100px; height: 100px; margin: 0 auto 16px;"></div>
+
+      <div style="position: relative;">
+        <h3 style="font-size: 28px; color: white; margin-bottom: 12px;">UTYA on Telegram</h3>
+        <a href="javascript:void(0);" onclick="document.getElementById('utyaSound').currentTime=0; document.getElementById('utyaSound').play(); window.open('https://telegram.org', '_blank', 'noopener');" style="
+          position: absolute;
+          bottom: 12px;
+          right: 12px;
+          background: rgba(0,0,0,0.6);
+          padding: 8px 14px;
+          border-radius: 8px;
+          color: #FFD700;
+          font-weight: bold;
+          font-size: 14px;
+          text-decoration: none;
+        ">Visit Live ↗</a>
+      </div>
+
+      <h3 style="font-size: 28px; color: #FFD700; margin-bottom: 12px;">Telegram.org</h3>
+      <p style="font-size: 18px; line-height: 1.6; color: #fffbe0;">
+        Believe it or not, you can spot UTYA right on Telegram’s official site—multiple times! This adorable duck isn’t just a meme anymore—he’s become a mascot, a favorite of Telegram itself. From press shots to product pages, UTYA’s charm is everywhere.
+      </p>
+    </div>
+
+    <!-- Telegram Blog Card -->
+    <div style="
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      max-width: 800px;
+      padding: 24px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    " onmouseover="this.style.transform='scale(1.015)'; this.style.boxShadow='0 8px 30px rgba(0, 0, 0, 0.35)'" onmouseout="this.style.transform=''; this.style.boxShadow=''">
+
+      <div id="utyaLottieNews" style="width: 100px; height: 100px; margin: 0 auto 16px;"></div>
+
+      <div style="position: relative;">
+        <h3 style="font-size: 28px; color: white; margin-bottom: 12px;">UTYA in Telegram News</h3>
+        <a href="javascript:void(0);" onclick="document.getElementById('utyaSound').currentTime=0; document.getElementById('utyaSound').play(); window.open('https://telegram.org/blog', '_blank', 'noopener');" style="
+          position: absolute;
+          bottom: 12px;
+          right: 12px;
+          background: rgba(0,0,0,0.6);
+          padding: 8px 14px;
+          border-radius: 8px;
+          color: #FFD700;
+          font-weight: bold;
+          font-size: 14px;
+          text-decoration: none;
+        ">View Blog ↗</a>
+      </div>
+
+      <h3 style="font-size: 28px; color: #FFD700; margin-bottom: 12px;">Telegram Blog & Announcements</h3>
+      <p style="font-size: 18px; line-height: 1.6; color: #fffbe0;">
+        UTYA has made his way into Telegram’s official blog posts, press shots, and announcement images. You can literally spot him in the background of feature updates and visual assets. That’s not a coincidence—this is meme culture getting its moment. Telegram embraces UTYA as part of its identity.
+      </p>
+    </div>
+
+  </div>
+</div>
+
+<!-- Audio -->
+<audio id="utyaSound" src="/utya-sound.mp3" preload="auto"></audio>
+
+<!-- Lottie JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.10.2/lottie.min.js"></script>
+<script type="module">
+  const animations = [
+    { id: 'utyaLottieTelegram', path: '/utya-tele.json' },
+    { id: 'utyaLottieNews', path: '/utya-news.json' }
+  ];
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const id = entry.target.id;
+      const existing = entry.target.getAttribute('data-loaded');
+
+      if (entry.isIntersecting) {
+        if (!existing) {
+          const anim = lottie.loadAnimation({
+            container: document.getElementById(id),
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            path: animations.find(a => a.id === id).path
+          });
+          entry.target.setAttribute('data-loaded', 'true');
+        }
+      }
+    });
+  }, { threshold: 0.3 });
+
+  animations.forEach(a => {
+    const el = document.getElementById(a.id);
+    if (el) observer.observe(el);
+  });
+</script>

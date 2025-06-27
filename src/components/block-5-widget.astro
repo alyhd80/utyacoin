@@ -1,4 +1,4 @@
-<div style="
+<div class="utya-widget" style="
   backdrop-filter: blur(12px);
   background: rgba(255, 255, 255, 0.12);
   border: 1px solid rgba(255, 255, 255, 0.25);
@@ -20,13 +20,7 @@
     At 38:38, Paul Durov reveals how tokenizing Telegram stickers is reshaping digital culture — and why <strong>UTYA</strong> leads this vibrant NFT revolution.
   </p>
 
-  <div style="margin-bottom: 20px;">
-    <img 
-      src="/haha-utya.gif" 
-      alt="Funny UTYA GIF" 
-      style="width: 80px; height: auto; display: block; margin: 0 auto;"
-    />
-  </div>
+  <div class="utya-lottie-container" style="width: 80px; height: 80px; margin: 0 auto 20px auto;"></div>
 
   <div style="margin-bottom: 40px;">
     <iframe 
@@ -42,3 +36,33 @@
   </div>
 
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.10.2/lottie.min.js"></script>
+<script>
+  (function(){
+    const containers = document.querySelectorAll('.utya-lottie-container');
+    containers.forEach(container => {
+      let animation = null;
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            if (!animation) {
+              animation = lottie.loadAnimation({
+                container: container,
+                renderer: 'svg',
+                loop: true,
+                autoplay: true,
+                path: '/utya-haha-classic.json'
+              });
+            } else {
+              animation.play();
+            }
+          } else {
+            if (animation) animation.pause();
+          }
+        });
+      }, { threshold: 0.3 });
+      observer.observe(container);
+    });
+  })();
+</script>

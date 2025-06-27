@@ -1,9 +1,4 @@
----
-const tokenAddress = 'EQBaCgUwOoc6gHCNln_oJzb0mVs79YG7wYoavh-o1ItaneLA';
-const explorerUrl = `https://tonviewer.com/${tokenAddress}`;
-const chartUrl = `https://dexscreener.com/ton/${tokenAddress}`;
----
-
+<!-- Official UTYA Token Section -->
 <div style="
   backdrop-filter: blur(12px);
   background: rgba(255, 255, 255, 0.12);
@@ -18,7 +13,7 @@ const chartUrl = `https://dexscreener.com/ton/${tokenAddress}`;
   font-family: 'Fredoka One', cursive, sans-serif;
 ">
   <div style="display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 20px;">
-    <img id="utya-egg-img" data-src="/utya-egg.gif" alt="UTYA Egg" style="width: 60px; height: auto;" />
+    <div id="utyaLottieCoin" style="width: 60px; height: 60px;"></div>
     <h2 style="font-size: 40px; margin: 0;">Official UTYA Token</h2>
   </div>
 
@@ -30,12 +25,12 @@ const chartUrl = `https://dexscreener.com/ton/${tokenAddress}`;
     border-radius: 12px;
     margin-bottom: 30px;
   ">
-    {tokenAddress}
+    EQBaCgUwOoc6gHCNln_oJzb0mVs79YG7wYoavh-o1ItaneLA
   </p>
 
   <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 16px;">
     <a 
-      onclick="navigator.clipboard.writeText('{tokenAddress}').then(() => document.getElementById('utyaSound').play())"
+      onclick="navigator.clipboard.writeText('EQBaCgUwOoc6gHCNln_oJzb0mVs79YG7wYoavh-o1ItaneLA').then(() => document.getElementById('utyaSound').play())"
       style="
         padding: 10px 20px;
         font-size: 16px;
@@ -51,7 +46,7 @@ const chartUrl = `https://dexscreener.com/ton/${tokenAddress}`;
 
     <a 
       href="javascript:void(0);" 
-      onclick="document.getElementById('utyaSound').currentTime=0; document.getElementById('utyaSound').play(); window.open('{explorerUrl}', '_blank', 'noopener');" 
+      onclick="document.getElementById('utyaSound').currentTime=0; document.getElementById('utyaSound').play(); window.open('https://tonviewer.com/EQBaCgUwOoc6gHCNln_oJzb0mVs79YG7wYoavh-o1ItaneLA', '_blank', 'noopener');" 
       style="
         padding: 10px 20px;
         font-size: 16px;
@@ -67,7 +62,7 @@ const chartUrl = `https://dexscreener.com/ton/${tokenAddress}`;
 
     <a 
       href="javascript:void(0);" 
-      onclick="document.getElementById('utyaSound').currentTime=0; document.getElementById('utyaSound').play(); window.open('{chartUrl}', '_blank', 'noopener');" 
+      onclick="document.getElementById('utyaSound').currentTime=0; document.getElementById('utyaSound').play(); window.open('https://dexscreener.com/ton/EQBaCgUwOoc6gHCNln_oJzb0mVs79YG7wYoavh-o1ItaneLA', '_blank', 'noopener');" 
       style="
         padding: 10px 20px;
         font-size: 16px;
@@ -85,16 +80,34 @@ const chartUrl = `https://dexscreener.com/ton/${tokenAddress}`;
 
 <audio id="utyaSound" src="/utya-sound.mp3" preload="auto"></audio>
 
+<!-- Lottie Web Animation -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.10.2/lottie.min.js"></script>
 <script type="module">
-  const utImg = document.getElementById('utya-egg-img');
-  const observer = new IntersectionObserver((entries) => {
+  const lottieContainer = document.getElementById('utyaLottieCoin');
+  let animation = null;
+
+  const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-      if (entry.isIntersecting && !utImg.src) {
-        utImg.src = utImg.dataset.src;
+      if (entry.isIntersecting) {
+        if (!animation) {
+          animation = lottie.loadAnimation({
+            container: lottieContainer,
+            renderer: 'svg',
+            loop: true,
+            autoplay: false,
+            path: '/utya-coin.json'
+          });
+          animation.play();
+        } else {
+          animation.play();
+        }
+      } else {
+        if (animation) animation.pause();
       }
     });
   }, {
     threshold: 0.3
   });
-  if (utImg) observer.observe(utImg);
+
+  if (lottieContainer) observer.observe(lottieContainer);
 </script>

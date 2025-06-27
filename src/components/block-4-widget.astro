@@ -2,7 +2,6 @@
 const {
   title = "UTYA",
   subtitle = "The Duck Everyone Knew, But No One Named",
-  
 } = Astro.props;
 ---
 
@@ -10,7 +9,7 @@ const {
 .black-4-widget {
   max-width: 1200px;
   margin: 48px auto;
-  color:rgba(255, 213, 39, 1);
+  color: rgba(255, 213, 39, 1);
   font-family: 'Fredoka One', cursive, sans-serif;
   text-align: center;
 }
@@ -26,9 +25,9 @@ const {
   margin-bottom: 24px;
 }
 
-.black-4-widget .card {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05));
-  border: 1px solid rgba(255, 255, 255, 0.2);
+.card {
+  background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.05));
+  border: 1px solid rgba(255,255,255,0.2);
   border-radius: 16px;
   padding: 24px;
   backdrop-filter: blur(10px);
@@ -38,16 +37,15 @@ const {
   user-select: none;
 }
 
-.black-4-widget .card img {
-  max-width: 100%;
+.card .intro-lottie {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  margin: 0 auto 16px auto;
   border-radius: 16px;
-  margin-bottom: 16px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
 }
 
-.black-4-widget .card-content {
+.card-content {
   font-size: 1.5rem;
   font-weight: bold;
   line-height: 1.6;
@@ -55,7 +53,6 @@ const {
   text-align: center;
 }
 
-/* بخش جدید برای توضیح utaya کیه */
 .utya-info {
   display: flex;
   align-items: center;
@@ -69,15 +66,16 @@ const {
   color: #eee;
 }
 
-.utya-info img {
-  width: 10rem; 
-  border-radius: 16px;
-}
-
 .utya-info-text {
   flex: 1;
   font-family: 'Fredoka One', cursive, sans-serif;
   font-weight: 500;
+}
+
+.utya-lottie {
+  width: 10rem;
+  height: 10rem;
+  border-radius: 16px;
 }
 
 @media (max-width: 768px) {
@@ -88,9 +86,10 @@ const {
     flex-direction: column;
     text-align: center;
   }
-  .utya-info img {
+  .utya-lottie {
     width: 80%;
     max-width: 300px;
+    height: auto;
     margin-bottom: 24px;
   }
 }
@@ -101,91 +100,93 @@ const {
   <div class="subtitle">{subtitle}</div>
 
   <div class="card">
-    <img src="/about-utya.gif" alt="About Utya" />
-    <div class="card-content">
-      Who's Utya?
-    </div>
-
-      <div class="utya-info">
-<div class="utya-info-text">
-  Utya is that little duck on Telegram everyone knows, even if they don’t really know his name.  
-  Whenever you search for something and come up empty,  
-  he’s the one who shows up to keep things fun.  
-  More than just a sticker, Utya has become a symbol of the playful and friendly vibe of Telegram.
-</div>
-
-    <img src="/utya-searcher.gif" alt="Utya Searcher" />
-  </div>
-
-
+    <div class="intro-lottie" data-src="/about-utya.json"></div>
+    <div class="card-content">Who's Utya?</div>
 
     <div class="utya-info">
       <div class="utya-info-text">
-        Even Utya knows it’s good to let go of the old.  
-        When your app data starts piling up, or storage feels heavy,  
-        just give things a little refresh — and guess who’s there with a broom and a wink?  
-        Yup, it’s Utya.  
-        Clearing space never looked this cute.
+        Utya is that little duck on Telegram everyone knows, even if they don’t really know his name.  
+        Whenever you search for something and come up empty, he’s the one who shows up to keep things fun.  
+        More than just a sticker, Utya has become a symbol of the playful and friendly vibe of Telegram.
       </div>
-
-      <img src="/utya-cleaner.gif" alt="Utya Cleaning" />
-  </div>
+      <div class="utya-lottie" data-src="/utya-searcher.json"></div>
+    </div>
 
     <div class="utya-info">
-<div class="utya-info-text">
-  When you enter auto-delete mode Utya appears with a friendly hello note  
-  reminding you that even messages deserve a graceful farewell  
-  More than just cute he’s your little helper making sure your chats stay fresh and clutter free  
-  Always there with a smile and a wave making tidying up feel easy and pleasant
-</div>
+      <div class="utya-info-text">
+        Even Utya knows it’s good to let go of the old. When your app data starts piling up,  
+        just give things a little refresh — and guess who’s there with a broom and a wink?  
+        Yup, it’s Utya. Clearing space never looked this cute.
+      </div>
+      <div class="utya-lottie" data-src="/utya-cleaner.json"></div>
+    </div>
 
+    <div class="utya-info">
+      <div class="utya-info-text">
+        When you enter auto-delete mode Utya appears with a friendly hello note  
+        reminding you that even messages deserve a graceful farewell.  
+        More than just cute, he’s your little helper making sure your chats stay fresh and clutter free.
+      </div>
+      <div class="utya-lottie" data-src="/hello-utya.json"></div>
+    </div>
 
-      <img src="/hello-utya.gif" alt="Utya Cleaning" />
+    <div class="utya-info">
+      <div class="utya-info-text">
+        When you lock your app, Utya makes sure your Telegram stays just yours.  
+        So if someone borrows your phone, your chats stay private and secure.
+      </div>
+      <div class="utya-lottie" data-src="/utya-lock.json"></div>
+    </div>
+
+    <div class="utya-info">
+      <div class="utya-info-text">
+        The very first time you open Telegram, something magical happens —  
+        <strong>Utya hatches from his little egg</strong> with a cheerful quack just to welcome you!  
+        With Utya by your side, every message starts with a smile and a splash of fun.
+      </div>
+      <div class="utya-lottie" data-src="/utya-egg.json"></div>
+    </div>
+
+    <div class="utya-info">
+      <div class="utya-info-text">
+        When you’re about to invite your friends to Telegram, Utya is the first to crash the party!  
+        With his playful grin and friendly quack, he reminds everyone that the fun is about to begin.
+      </div>
+      <div class="utya-lottie" data-src="/utya-invite.json"></div>
+    </div>
   </div>
-  
-   <div class="utya-info">
-<div class="utya-info-text">
-  When you lock your app, Utya makes sure your Telegram stays just yours.  
-  So if someone borrows your phone, your chats stay private and secure.  
-  Only you can unlock and dive back in.
-</div>
-      <img src="/utya-lock.gif" alt="Utya Cleaning" />
-  </div>
-
-<div class="utya-info">
-  <div class="utya-info-text">
-    The very first time you open Telegram, something magical happens — <strong>Utya hatches from his little egg</strong> with a cheerful quack just to welcome you!  
-    He’s not just adorable — he’s your playful guide to help you explore, chat, and make Telegram feel like home from the very first tap.  
-    With Utya by your side, every message starts with a smile and a splash of fun!
-  </div>
-  <img src="utya-egg.gif" alt="Utya Hatching from Egg" />
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.10.2/lottie.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const lottieElements = document.querySelectorAll('.intro-lottie, .utya-lottie');
 
+    lottieElements.forEach(el => {
+      const path = el.getAttribute('data-src');
+      let animation = null;
 
-<div class="utya-info">
-<div class="utya-info-text">
-  The moment you open Telegram for the first time, Utya is there to welcome you with a friendly quack!  
-  He’s your quirky guide, ready to help you explore, chat, and connect like never before.  
-  With Utya by your side, your Telegram journey starts with a smile and a splash of fun!
-</div>
-      <img src="utya-detection.gif" alt="Utya Cleaning" />
-</div>
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            if (!animation) {
+              animation = lottie.loadAnimation({
+                container: el,
+                renderer: 'svg',
+                loop: true,
+                autoplay: true,
+                path: path
+              });
+            } else {
+              animation.play();
+            }
+          } else {
+            if (animation) animation.pause();
+          }
+        });
+      }, { threshold: 0.25 });
 
-
-<div class="utya-info">
-  <div class="utya-info-text">
-    When you’re about to invite your friends to Telegram, Utya is the first to crash the party!  
-    With his playful grin and friendly quack, he reminds everyone that this hangout is about to get fun and unforgettable.  
-    When Utya joins the crew, you know the good times have just begun!
-  </div>
-  <img src="utya-invite.gif" alt="Utya Joining the Party" />
-</div>
-
-
-
-
-
-  </div>
-
-
+      observer.observe(el);
+    });
+  });
+</script>
