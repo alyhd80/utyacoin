@@ -5,6 +5,8 @@ import Block2Widget from '../components/block-2-widget.astro';
 import Block3Widget from '../components/block-3-widget.astro';
 import Block4Widget from '../components/block-4-widget.astro';
 import Block5Widget from '../components/block-5-widget.astro';
+import Block6Widget from '../components/block-6-widget.astro';
+import Block7Widget from '../components/block-7-widget.astro';
 
 const blocks = [
   { id: 1, Component: Block1Widget },
@@ -14,6 +16,11 @@ const blocks = [
     { id: 4, Component: Block4Widget },
     { id: 2, Component: Block2Widget },
     { id: 5, Component: Block5Widget },
+      { id: 2, Component: Block2Widget },
+
+    { id: 6, Component: Block6Widget },
+  { id: 2, Component: Block2Widget },
+  { id: 7, Component: Block7Widget },
 
 ];
 ---
@@ -186,7 +193,7 @@ font-size: 4vw;
             },
             { once: true }
           );
-        }, 1000);///timer
+        }, 0);///timer
       });
 
       // Ripple canvas animation

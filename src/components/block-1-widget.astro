@@ -32,7 +32,6 @@ Today, Utya is more than just cute , it's a movement.
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-
 .block-1-widget .description a {
   color: #ffd527;
   text-decoration: none;
@@ -40,78 +39,79 @@ Today, Utya is more than just cute , it's a movement.
 .block-1-widget .description a:hover {
   opacity: 0.8;
 }
-  .block-1-widget .content {
-    flex: 1 1 50%;
-    padding-right: 24px;
-    display: flex;
+
+.block-1-widget .content {
+  flex: 1 1 50%;
+  padding-right: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.block-1-widget .intro-heading {
+  margin-bottom: 16px;
+}
+
+.block-1-widget .intro-heading div {
+  line-height: 1.2;
+}
+
+.block-1-widget .intro-intro {
+  font-size: 1.2rem;
+  color: rgba(141, 82, 193, 1);
+}
+
+.block-1-widget .intro-name {
+  font-size: 3rem;
+  color: rgba(255, 213, 39, 1);
+  margin-top: 8px;
+}
+
+.block-1-widget .intro-tagline {
+  font-size: 1.2rem;
+  margin-top: 8px;
+  color: rgba(141, 82, 193, 1);
+}
+
+.block-1-widget .description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.block-1-widget .description a {
+  color: #ffd527;
+  text-decoration: underline;
+}
+
+.block-1-widget .gif-container {
+  flex: 1 1 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+}
+
+.block-1-widget .gif-container img {
+  max-width: 100%;
+  width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 16px;
+}
+
+@media (max-width: 768px) {
+  .block-1-widget {
     flex-direction: column;
-    justify-content: center;
+    min-height: auto;
   }
-
-  .block-1-widget .intro-heading {
-    margin-bottom: 16px;
-  }
-
-  .block-1-widget .intro-heading div {
-    line-height: 1.2;
-  }
-
-  .block-1-widget .intro-intro {
-    font-size: 1.2rem;
-    color: rgba(141, 82, 193, 1);
-  }
-
-  .block-1-widget .intro-name {
-    font-size: 3rem;
-    color: rgba(255, 213, 39, 1);
-    margin-top: 8px;
-  }
-
-  .block-1-widget .intro-tagline {
-    font-size: 1.2rem;
-    margin-top: 8px;
-    color: rgba(141, 82, 193, 1);
-  }
-
-  .block-1-widget .description {
-    font-size: 1.1rem;
-    line-height: 1.6;
+  .block-1-widget .content,
+  .block-1-widget .gif-container {
+    flex: 1 1 100%;
+    padding-right: 0;
     margin-bottom: 24px;
   }
-
-  .block-1-widget .description a {
-    color: #ffd527;
-    text-decoration: underline;
-  }
-
-  .block-1-widget .gif-container {
-    flex: 1 1 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: transparent;
-  }
-
-  .block-1-widget .gif-container img {
-    max-width: 100%;
-    width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-    border-radius: 16px;
-  }
-
-  @media (max-width: 768px) {
-    .block-1-widget {
-      flex-direction: column;
-      min-height: auto;
-    }
-    .block-1-widget .content,
-    .block-1-widget .gif-container {
-      flex: 1 1 100%;
-      padding-right: 0;
-      margin-bottom: 24px;
-    }
-  }
+}
 </style>
 
 <div class="block-1-widget" role="region" aria-label="Intro Utya widget">
@@ -124,6 +124,22 @@ Today, Utya is more than just cute , it's a movement.
     <div class="description" set:html={description}></div>
   </div>
   <div class="gif-container">
-    <img src={gifSrc} alt="Funny Utya GIF" />
+    <img data-src={gifSrc} alt="Funny Utya GIF" />
   </div>
 </div>
+
+<script type="module">
+  const gifImg = document.querySelector('.gif-container img');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !gifImg.src) {
+        gifImg.src = gifImg.dataset.src;
+      }
+    });
+  }, {
+    threshold: 0.3
+  });
+
+  if (gifImg) observer.observe(gifImg);
+</script>

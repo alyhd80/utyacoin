@@ -18,7 +18,7 @@ const chartUrl = `https://dexscreener.com/ton/${tokenAddress}`;
   font-family: 'Fredoka One', cursive, sans-serif;
 ">
   <div style="display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 20px;">
-    <img src="/utya-egg.gif" alt="UTYA Egg" style="width: 60px; height: auto;" />
+    <img id="utya-egg-img" data-src="/utya-egg.gif" alt="UTYA Egg" style="width: 60px; height: auto;" />
     <h2 style="font-size: 40px; margin: 0;">Official UTYA Token</h2>
   </div>
 
@@ -49,38 +49,52 @@ const chartUrl = `https://dexscreener.com/ton/${tokenAddress}`;
       📋 Copy
     </a>
 
- <a 
-  href="javascript:void(0);" 
-  onclick="document.getElementById('utyaSound').currentTime=0; document.getElementById('utyaSound').play(); window.open('https://tonviewer.com/EQBaCgUwOoc6gHCNln_oJzb0mVs79YG7wYoavh-o1ItaneLA', '_blank', 'noopener');" 
-  style="
-    padding: 10px 20px;
-    font-size: 16px;
-    border-radius: 10px;
-    background: white;
-    color: #0ca0d9;
-    text-decoration: none;
-    cursor: pointer;
-  "
->
-  🔍 View on TON Viewer
-</a>
+    <a 
+      href="javascript:void(0);" 
+      onclick="document.getElementById('utyaSound').currentTime=0; document.getElementById('utyaSound').play(); window.open('{explorerUrl}', '_blank', 'noopener');" 
+      style="
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 10px;
+        background: white;
+        color: #0ca0d9;
+        text-decoration: none;
+        cursor: pointer;
+      "
+    >
+      🔍 View on TON Viewer
+    </a>
 
-<a 
-  href="javascript:void(0);" 
-  onclick="document.getElementById('utyaSound').currentTime=0; document.getElementById('utyaSound').play(); window.open('https://dexscreener.com/ton/EQBaCgUwOoc6gHCNln_oJzb0mVs79YG7wYoavh-o1ItaneLA', '_blank', 'noopener');" 
-  style="
-    padding: 10px 20px;
-    font-size: 16px;
-    border-radius: 10px;
-    background: white;
-    color: #0ca0d9;
-    text-decoration: none;
-    cursor: pointer;
-  "
->
-  📈 DEXScreener Chart
-</a>
+    <a 
+      href="javascript:void(0);" 
+      onclick="document.getElementById('utyaSound').currentTime=0; document.getElementById('utyaSound').play(); window.open('{chartUrl}', '_blank', 'noopener');" 
+      style="
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 10px;
+        background: white;
+        color: #0ca0d9;
+        text-decoration: none;
+        cursor: pointer;
+      "
+    >
+      📈 DEXScreener Chart
+    </a>
   </div>
 </div>
 
 <audio id="utyaSound" src="/utya-sound.mp3" preload="auto"></audio>
+
+<script type="module">
+  const utImg = document.getElementById('utya-egg-img');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !utImg.src) {
+        utImg.src = utImg.dataset.src;
+      }
+    });
+  }, {
+    threshold: 0.3
+  });
+  if (utImg) observer.observe(utImg);
+</script>

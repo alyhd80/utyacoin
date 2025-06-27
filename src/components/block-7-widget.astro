@@ -1,0 +1,143 @@
+<div id="utya-faces-section" style="
+  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 24px;
+  margin: 60px auto;
+  max-width: 1200px;
+  color: white;
+  text-align: center;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+  font-family: 'Fredoka One', cursive, sans-serif;
+  padding-bottom: 40px;
+">
+  <h2 style="font-size: 46px; margin-bottom: 18px; font-weight: 900; letter-spacing: 1.6px; padding:0 20px;">
+    The Many Faces of UTYA
+  </h2>
+
+  <p style="font-size: 18px; max-width: 880px; margin: 0 auto 48px auto; line-height: 1.8; color: #FFD700; padding:0 20px;">
+    Mood swings, meme vibes, pure duck energy. These faces aren't just expressions — they're the entire UTYA spectrum. Slide through the legendary looks that made UTYA a cult icon on-chain.
+  </p>
+
+  <div id="utya-scroll">
+    <!-- UTYA Face Cards -->
+    <div class="face-card"><img data-src="/utya-svg-(1).svg" alt="UTYA Face 1" /></div>
+    <div class="face-card"><img data-src="/utya-svg-(2).svg" alt="UTYA Face 2" /></div>
+    <div class="face-card"><img data-src="/utya-svg-(3).svg" alt="UTYA Face 3" /></div>
+    <div class="face-card"><img data-src="/utya-svg-(4).svg" alt="UTYA Face 4" /></div>
+    <div class="face-card"><img data-src="/utya-svg-(5).svg" alt="UTYA Face 5" /></div>
+    <div class="face-card"><img data-src="/utya-svg-(6).svg" alt="UTYA Face 6" /></div>
+    <div class="face-card"><img data-src="/utya-svg-(7).svg" alt="UTYA Face 7" /></div>
+    <div class="face-card"><img data-src="/utya-svg-(8).svg" alt="UTYA Face 8" /></div>
+    <div class="face-card"><img data-src="/utya-svg-(9).svg" alt="UTYA Face 9" /></div>
+    <div class="face-card"><img data-src="/utya-svg-(10).svg" alt="UTYA Face 10" /></div>
+    <div class="face-card"><img data-src="/utya-svg-(11).svg" alt="UTYA Face 11" /></div>
+    <div class="face-card"><img data-src="/utya-svg-(12).svg" alt="UTYA Face 12" /></div>
+    <div class="face-card"><img data-src="/utya-svg-(13).svg" alt="UTYA Face 13" /></div>
+    <div class="face-card"><img data-src="/utya-svg-(14).svg" alt="UTYA Face 14" /></div>
+    <div class="face-card"><img data-src="/utya-svg-(15).svg" alt="UTYA Face 15" /></div>
+    <div class="face-card"><img data-src="/utya-svg-(16).svg" alt="UTYA Face 16" /></div>
+    <div class="face-card"><img data-src="/utya-svg-(17).svg" alt="UTYA Face 17" /></div>
+    <div class="face-card"><img data-src="/utya-svg-(18).svg" alt="UTYA Face 18" /></div>
+    <div class="face-card"><img data-src="/utya-svg-(19).svg" alt="UTYA Face 19" /></div>
+    <div class="face-card"><img data-src="/utya-svg-(20).svg" alt="UTYA Face 20" /></div>
+    <div class="face-card"><img data-src="/utya-svg-(21).svg" alt="UTYA Face 21" /></div>
+    <div class="face-card"><img data-src="/utya-svg-(22).svg" alt="UTYA Face 22" /></div>
+    <div class="face-card"><img data-src="/utya-svg-(23).svg" alt="UTYA Face 23" /></div>
+  </div>
+</div>
+
+<style>
+#utya-scroll {
+  display: flex;
+  overflow-x: auto;
+  gap: 16px;
+  padding: 0 0 12px 0;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  cursor: grab;
+  user-select: none;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+#utya-scroll::-webkit-scrollbar {
+  display: none;
+}
+#utya-scroll.dragging {
+  cursor: grabbing;
+}
+.face-card {
+  flex: 0 0 auto;
+  width: 140px;
+  height: 140px;
+  border-radius: 16px;
+  overflow: hidden;
+  scroll-snap-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.face-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  pointer-events: none;
+  user-drag: none;
+  -webkit-user-drag: none;
+}
+</style>
+
+<script>
+// Lazy Load for faces
+const faceObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    const img = entry.target;
+    if (entry.isIntersecting && !img.src) {
+      img.src = img.dataset.src;
+    }
+  });
+}, { threshold: 0.4 });
+
+document.querySelectorAll('.face-card img').forEach(img => {
+  faceObserver.observe(img);
+});
+
+// Drag to scroll for faces
+const faceScrollContainer = document.getElementById('utya-scroll');
+let isDownFace = false, startXFace, scrollLeftFace;
+
+faceScrollContainer.addEventListener('mousedown', (e) => {
+  isDownFace = true;
+  faceScrollContainer.classList.add('dragging');
+  startXFace = e.pageX - faceScrollContainer.offsetLeft;
+  scrollLeftFace = faceScrollContainer.scrollLeft;
+});
+faceScrollContainer.addEventListener('mouseleave', () => {
+  isDownFace = false;
+  faceScrollContainer.classList.remove('dragging');
+});
+faceScrollContainer.addEventListener('mouseup', () => {
+  isDownFace = false;
+  faceScrollContainer.classList.remove('dragging');
+});
+faceScrollContainer.addEventListener('mousemove', (e) => {
+  if (!isDownFace) return;
+  e.preventDefault();
+  const x = e.pageX - faceScrollContainer.offsetLeft;
+  faceScrollContainer.scrollLeft = scrollLeftFace - (x - startXFace) * 1.5;
+});
+
+// Wheel scroll for faces (desktop)
+faceScrollContainer.addEventListener('wheel', function (e) {
+  if (window.innerWidth >= 768 && Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+    e.preventDefault();
+    faceScrollContainer.scrollLeft += e.deltaY * 1.2;
+  }
+}, { passive: false });
+
+// Prevent image drag
+document.querySelectorAll('#utya-scroll img').forEach(img => {
+  img.addEventListener('dragstart', e => e.preventDefault());
+});
+</script>

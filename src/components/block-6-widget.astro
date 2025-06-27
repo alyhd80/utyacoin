@@ -1,0 +1,143 @@
+<div id="utya-nft-section" style="
+  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 24px;
+  margin: 60px auto;
+  max-width: 1200px;
+  color: white;
+  text-align: center;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+  font-family: 'Fredoka One', cursive, sans-serif;
+    padding-bottom: 40px; /* اینجا فاصله پایین اضافه شد */
+
+">
+  <h2 style="font-size: 44px; margin-bottom: 16px; font-weight: 900; letter-spacing: 1.5px;">
+    Meet the Legendary UTYA NFT Collection
+  </h2>
+
+  <p style="font-size: 18px; max-width: 860px; margin: 0 auto 40px auto; line-height: 1.7; color: #FFD700;">
+    From viral Telegram stickers to collectible on-chain assets — the UTYA NFTs are not just art, they're a movement. Dive into the most iconic ducks of the blockchain, hand-drawn and community-loved.
+  </p>
+
+  <div id="nft-scroll">
+    <!-- NFT Cards -->
+    <div class="nft-card"><img data-src="/nft-1.gif" alt="UTYA NFT 1" /></div>
+    <div class="nft-card"><img data-src="/nft-2.gif" alt="UTYA NFT 2" /></div>
+    <div class="nft-card"><img data-src="/nft-3.gif" alt="UTYA NFT 3" /></div>
+    <div class="nft-card"><img data-src="/nft-4.gif" alt="UTYA NFT 4" /></div>
+    <div class="nft-card"><img data-src="/nft-5.gif" alt="UTYA NFT 5" /></div>
+    <div class="nft-card"><img data-src="/nft-6.gif" alt="UTYA NFT 6" /></div>
+    <div class="nft-card"><img data-src="/nft-7.gif" alt="UTYA NFT 7" /></div>
+    <div class="nft-card"><img data-src="/nft-8.gif" alt="UTYA NFT 8" /></div>
+    <div class="nft-card"><img data-src="/nft-9.gif" alt="UTYA NFT 9" /></div>
+    <div class="nft-card"><img data-src="/nft-10.gif" alt="UTYA NFT 10" /></div>
+    <div class="nft-card"><img data-src="/nft-11.gif" alt="UTYA NFT 11" /></div>
+  </div>
+</div>
+
+<style>
+#nft-scroll {
+  display: flex;
+  overflow-x: auto;
+  gap: 16px;
+  padding: 0 20px 8px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  cursor: grab;
+  user-select: none;
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+#nft-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+#nft-scroll.dragging {
+  cursor: grabbing;
+  user-select: none;
+}
+
+.nft-card {
+  flex: 0 0 auto;
+  width: 150px;
+  height: 150px;
+  border-radius: 16px;
+  overflow: hidden;
+  scroll-snap-align: center;
+}
+
+.nft-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none; /* جلوگیری از کشیدن تصویر */
+  user-drag: none; /* مخصوص برخی مرورگرها */
+  -webkit-user-drag: none; /* مخصوص Safari/Chrome */
+}
+</style>
+
+<script>
+// Lazy Load
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    const img = entry.target;
+    if (entry.isIntersecting && !img.src) {
+      img.src = img.dataset.src;
+    }
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.nft-card img').forEach(img => {
+  observer.observe(img);
+});
+
+// Horizontal scroll with mouse wheel (desktop)
+const scrollContainer = document.getElementById('nft-scroll');
+
+scrollContainer.addEventListener('wheel', function (e) {
+  if (window.innerWidth >= 768 && Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+    e.preventDefault();
+    scrollContainer.scrollLeft += e.deltaY * 1.2;
+  }
+}, { passive: false });
+
+// Drag to Scroll
+let isDown = false;
+let startX;
+let scrollLeft;
+
+scrollContainer.addEventListener('mousedown', (e) => {
+  isDown = true;
+  scrollContainer.classList.add('dragging');
+  startX = e.pageX - scrollContainer.offsetLeft;
+  scrollLeft = scrollContainer.scrollLeft;
+});
+scrollContainer.addEventListener('mouseleave', () => {
+  isDown = false;
+  scrollContainer.classList.remove('dragging');
+});
+scrollContainer.addEventListener('mouseup', () => {
+  isDown = false;
+  scrollContainer.classList.remove('dragging');
+});
+scrollContainer.addEventListener('mousemove', (e) => {
+  if (!isDown) return;
+  e.preventDefault();
+  const x = e.pageX - scrollContainer.offsetLeft;
+  const walk = (x - startX) * 1.5; // scroll speed multiplier
+  scrollContainer.scrollLeft = scrollLeft - walk;
+});
+
+
+// جلوگیری از درگ شدن عکس‌ها
+document.querySelectorAll('#nft-scroll img').forEach(img => {
+  img.addEventListener('dragstart', e => e.preventDefault());
+});
+
+
+</script>
+
