@@ -1,0 +1,85 @@
+<div id="utya-footer" style="
+  backdrop-filter: blur(14px);
+  background: rgba(255, 255, 255, 0.06);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 48px 24px 220px 24px;
+  margin: 100px auto 0 auto; /* وسط‌چین کردن با auto برای راست و چپ */
+  max-width: 1150px;
+    border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+
+  text-align: center;
+  font-family: 'Fredoka One', cursive, sans-serif;
+  color: white;
+  position: relative;
+  box-shadow: inset 0 8px 16px rgba(0,0,0,0.25);
+  overflow: visible;
+">
+
+  <!-- Lottie animation (Top) -->
+  <div id="utya-love-lottie" style="width: 100px; height: 100px; margin: 0 auto 24px auto;"></div>
+
+  <h3 style="font-size: 24px; margin-bottom: 12px; color: #FFD700;">
+    Thanks for scrolling with UTYA 💛
+  </h3>
+
+  <p style="font-size: 16px; opacity: 0.9; margin-bottom: 24px;">
+    We appreciate you being part of our journey.
+  </p>
+
+  <p style="font-size: 14px; color: rgba(255,255,255,0.7); margin-bottom: 0;">
+    © 2024–2025 UTYA Token. All Rights Reserved.
+  </p>
+
+  <!-- PNG Image exactly at bottom inside footer -->
+  <div id="utya-end-image" style="
+    display: none;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+  ">
+    <img src="/utya-end.png" alt="Utya End" style="width: 100%;">
+  </div>
+
+</div>
+
+<!-- Lottie Script -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.10.2/lottie.min.js"></script>
+
+<script>
+  // Lazy load Lottie animation on visibility
+  const loveContainer = document.getElementById('utya-love-lottie');
+  let lovePlayer = null;
+
+  const loveObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !lovePlayer) {
+        lovePlayer = lottie.loadAnimation({
+          container: loveContainer,
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: '/utya-love.json'
+        });
+        loveObserver.unobserve(loveContainer);
+      }
+    });
+  }, { threshold: 0.4 });
+
+  loveObserver.observe(loveContainer);
+
+  // Lazy show PNG image when footer appears
+  const endImage = document.getElementById('utya-end-image');
+  const endObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        endImage.style.display = 'block';
+        endObserver.unobserve(endImage);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  endObserver.observe(document.getElementById('utya-footer'));
+</script>

@@ -6,17 +6,14 @@ Born from the mind of legendary designer Egor Zhgun in 2020, this yellow duck ha
 Want proof? Check out the original art <a href="https://www.behance.net/gallery/93658133/Utya-Duck-Telegram-Stickers?locale=en_US" target="_blank" rel="noopener noreferrer" style="color: #ffd527;">here on Behance</a> , and dive into <a href="https://t.me/addstickers/UtyaDuck" target="_blank" rel="noopener noreferrer" style="color: #ffd527;">Utya’s sticker</a> world  
 right on <a href="https://telegram.org/" target="_blank" rel="noopener noreferrer" style="color: #ffd527;">Telegram</a>.  
 Today, Utya is more than just cute , it's a movement.
-` } = Astro.props;
+` 
+} = Astro.props;
 ---
 
 <style>
 .block-1-widget {
   display: flex;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.05),
-    rgba(255, 255, 255, 0.05)
-  );
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05));
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-radius: 16px;
@@ -49,22 +46,18 @@ Today, Utya is more than just cute , it's a movement.
 .block-1-widget .intro-heading {
   margin-bottom: 16px;
 }
-
 .block-1-widget .intro-heading div {
   line-height: 1.2;
 }
-
 .block-1-widget .intro-intro {
   font-size: 1.2rem;
   color: rgba(141, 82, 193, 1);
 }
-
 .block-1-widget .intro-name {
   font-size: 3rem;
   color: rgba(255, 213, 39, 1);
   margin-top: 8px;
 }
-
 .block-1-widget .intro-tagline {
   font-size: 1.2rem;
   margin-top: 8px;
@@ -75,11 +68,7 @@ Today, Utya is more than just cute , it's a movement.
   font-size: 1.1rem;
   line-height: 1.6;
   margin-bottom: 24px;
-}
-
-.block-1-widget .description a {
-  color: #ffd527;
-  text-decoration: underline;
+  color: white;
 }
 
 .block-1-widget .lottie-container {
@@ -89,6 +78,7 @@ Today, Utya is more than just cute , it's a movement.
   justify-content: center;
   background: transparent;
   border-radius: 16px;
+  overflow: hidden;
 }
 
 .block-1-widget .lottie-container > div {
@@ -96,7 +86,7 @@ Today, Utya is more than just cute , it's a movement.
   max-width: 400px;
   max-height: 400px;
 }
-  
+
 @media (max-width: 768px) {
   .block-1-widget {
     flex-direction: column;
@@ -120,7 +110,9 @@ Today, Utya is more than just cute , it's a movement.
     </h2>
     <div class="description" set:html={description}></div>
   </div>
-  <div class="lottie-container" id="lottie-container"></div>
+  <div class="lottie-container" id="lottie-container">
+    <!-- Animation will be injected here -->
+  </div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.10.2/lottie.min.js"></script>
@@ -129,11 +121,12 @@ Today, Utya is more than just cute , it's a movement.
   let animation = null;
 
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
+    entries.forEach((entry) => {
       if (entry.isIntersecting) {
         if (!animation) {
+          container.innerHTML = ""; // Clean up any previous SVG
           animation = lottie.loadAnimation({
-            container: container,
+            container,
             renderer: 'svg',
             loop: true,
             autoplay: true,
@@ -146,7 +139,7 @@ Today, Utya is more than just cute , it's a movement.
         if (animation) animation.pause();
       }
     });
-  }, { threshold: 0.3 });
+  }, { threshold: 0.4 });
 
-  if(container) observer.observe(container);
+  if (container) observer.observe(container);
 </script>

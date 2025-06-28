@@ -1,0 +1,126 @@
+---
+
+
+---
+
+<section id="socials">
+
+  <div id="utya-socials" style="
+    backdrop-filter: blur(14px);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 24px;
+    padding: 48px 32px;
+    margin: 60px auto;
+    max-width: 1150px;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    font-family: 'Fredoka One', cursive, sans-serif;
+    color: white;
+    overflow: hidden;
+  ">
+
+    <!-- Lottie Animation Container -->
+    <div id="socials-lottie" style="width: 120px; height: 120px; margin: 0 auto 24px auto;"></div>
+
+    <h2 style="font-size: 36px; margin-bottom: 12px; letter-spacing: 1px;">
+      Our Socials
+    </h2>
+    <p style="font-size: 18px; color: #FFD700; margin-bottom: 36px;">
+      Follow us on social media to stay updated, join the Utya movement, and quack with the community.
+    </p>
+
+    <div style="display: flex; justify-content: center; gap: 32px; flex-wrap: wrap;">
+
+      <!-- Telegram Button -->
+      <a href="https://t.me/utyaofficial" target="_blank" class="social-btn" id="telegram-btn" style="
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 16px;
+        padding: 14px 24px;
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+        transition: all 0.3s ease;
+        cursor: pointer;
+      ">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" alt="Telegram" style="width: 28px; height: 28px;">
+        Telegram
+      </a>
+
+      <!-- X/Twitter Button -->
+      <a href="https://x.com/TonUtyacoin" target="_blank" class="social-btn" id="twitter-btn" style="
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 16px;
+        padding: 14px 24px;
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+        transition: all 0.3s ease;
+        cursor: pointer;
+      ">
+        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968830.png" alt="X" style="width: 28px; height: 28px;">
+        Twitter / X
+      </a>
+
+    </div>
+  </div>
+
+  <audio id="duckSound" src="/utya-sound.mp3" preload="auto"></audio>
+
+  <!-- Lottie Script -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.10.2/lottie.min.js"></script>
+  <script>
+    const lottieContainer = document.getElementById('socials-lottie');
+    let socialsLottiePlayer = null;
+
+    const socialsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          if (!socialsLottiePlayer) {
+            socialsLottiePlayer = lottie.loadAnimation({
+              container: lottieContainer,
+              renderer: 'svg',
+              loop: true,
+              autoplay: true,
+              path: '/utya-socials.json'
+            });
+          } else {
+            socialsLottiePlayer.play();
+          }
+        } else {
+          if (socialsLottiePlayer) {
+            socialsLottiePlayer.pause();
+          }
+        }
+      });
+    }, { threshold: 0.3 });
+
+    socialsObserver.observe(lottieContainer);
+
+    const duckSound = document.getElementById('duckSound');
+
+    function handleClickWithSound(event) {
+      event.preventDefault();
+      const url = event.currentTarget.href;
+
+      if (duckSound.paused) {
+        duckSound.currentTime = 0;
+        duckSound.play();
+        duckSound.onended = () => {
+          window.open(url, '_blank', 'noopener');
+        };
+      }
+    }
+
+    document.getElementById('telegram-btn').addEventListener('click', handleClickWithSound);
+    document.getElementById('twitter-btn').addEventListener('click', handleClickWithSound);
+  </script>
+</section>

@@ -4,158 +4,159 @@ const {
   subtitle = "The Duck Everyone Knew, But No One Named",
 } = Astro.props;
 ---
+<section id="about">
+  <div class="black-4-widget">
+    <h2>{title}</h2>
+    <div class="subtitle">{subtitle}</div>
 
-<style>
-.black-4-widget {
-  max-width: 1200px;
-  margin: 48px auto;
-  color: rgba(255, 213, 39, 1);
-  font-family: 'Fredoka One', cursive, sans-serif;
-  text-align: center;
-}
+    <div class="card">
+      <div class="intro-lottie" data-src="/about-utya.json"></div>
+      <div class="card-content">Who's Utya?</div>
 
-.black-4-widget h2 {
-  font-size: 2rem;
-  margin-bottom: 8px;
-}
-
-.black-4-widget .subtitle {
-  font-size: 1.5rem;
-  color: white;
-  margin-bottom: 24px;
-}
-
-.card {
-  background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.05));
-  border: 1px solid rgba(255,255,255,0.2);
-  border-radius: 16px;
-  padding: 24px;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  margin-top: 32px;
-  text-align: left;
-  user-select: none;
-}
-
-.card .intro-lottie {
-  width: 100%;
-  max-width: 600px;
-  height: auto;
-  margin: 0 auto 16px auto;
-  border-radius: 16px;
-}
-
-.card-content {
-  font-size: 1.5rem;
-  font-weight: bold;
-  line-height: 1.6;
-  color: rgba(141, 82, 193, 1);
-  text-align: center;
-}
-
-.utya-info {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  margin-top: 48px;
-  max-width: 900px;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: left;
-  font-size: 1.1rem;
-  color: #eee;
-}
-
-.utya-info-text {
-  flex: 1;
-  font-family: 'Fredoka One', cursive, sans-serif;
-  font-weight: 500;
-}
-
-.utya-lottie {
-  width: 10rem;
-  height: 10rem;
-  border-radius: 16px;
-}
-
-@media (max-width: 768px) {
-  .black-4-widget h2 {
-    font-size: 1.5rem;
-  }
-  .utya-info {
-    flex-direction: column;
-    text-align: center;
-  }
-  .utya-lottie {
-    width: 80%;
-    max-width: 300px;
-    height: auto;
-    margin-bottom: 24px;
-  }
-}
-</style>
-
-<div class="black-4-widget">
-  <h2>{title}</h2>
-  <div class="subtitle">{subtitle}</div>
-
-  <div class="card">
-    <div class="intro-lottie" data-src="/about-utya.json"></div>
-    <div class="card-content">Who's Utya?</div>
-
-    <div class="utya-info">
-      <div class="utya-info-text">
-        Utya is that little duck on Telegram everyone knows, even if they don’t really know his name.  
-        Whenever you search for something and come up empty, he’s the one who shows up to keep things fun.  
-        More than just a sticker, Utya has become a symbol of the playful and friendly vibe of Telegram.
+      <div class="utya-info">
+        <div class="utya-info-text">
+          Utya is that little duck on Telegram everyone knows, even if they don’t really know his name.  
+          Whenever you search for something and come up empty, he’s the one who shows up to keep things fun.  
+          More than just a sticker, Utya has become a symbol of the playful and friendly vibe of Telegram.
+        </div>
+        <div class="utya-lottie" data-src="/utya-searcher.json"></div>
       </div>
-      <div class="utya-lottie" data-src="/utya-searcher.json"></div>
-    </div>
 
-    <div class="utya-info">
-      <div class="utya-info-text">
-        Even Utya knows it’s good to let go of the old. When your app data starts piling up,  
-        just give things a little refresh — and guess who’s there with a broom and a wink?  
-        Yup, it’s Utya. Clearing space never looked this cute.
+      <div class="utya-info">
+        <div class="utya-info-text">
+          Even Utya knows it’s good to let go of the old. When your app data starts piling up,  
+          just give things a little refresh — and guess who’s there with a broom and a wink?  
+          Yup, it’s Utya. Clearing space never looked this cute.
+        </div>
+        <div class="utya-lottie" data-src="/utya-cleaner.json"></div>
       </div>
-      <div class="utya-lottie" data-src="/utya-cleaner.json"></div>
-    </div>
 
-    <div class="utya-info">
-      <div class="utya-info-text">
-        When you enter auto-delete mode Utya appears with a friendly hello note  
-        reminding you that even messages deserve a graceful farewell.  
-        More than just cute, he’s your little helper making sure your chats stay fresh and clutter free.
+      <div class="utya-info">
+        <div class="utya-info-text">
+          When you enter auto-delete mode Utya appears with a friendly hello note  
+          reminding you that even messages deserve a graceful farewell.  
+          More than just cute, he’s your little helper making sure your chats stay fresh and clutter free.
+        </div>
+        <div class="utya-lottie" data-src="/hello-utya.json"></div>
       </div>
-      <div class="utya-lottie" data-src="/hello-utya.json"></div>
-    </div>
 
-    <div class="utya-info">
-      <div class="utya-info-text">
-        When you lock your app, Utya makes sure your Telegram stays just yours.  
-        So if someone borrows your phone, your chats stay private and secure.
+      <div class="utya-info">
+        <div class="utya-info-text">
+          When you lock your app, Utya makes sure your Telegram stays just yours.  
+          So if someone borrows your phone, your chats stay private and secure.
+        </div>
+        <div class="utya-lottie" data-src="/utya-lock.json"></div>
       </div>
-      <div class="utya-lottie" data-src="/utya-lock.json"></div>
-    </div>
 
-    <div class="utya-info">
-      <div class="utya-info-text">
-        The very first time you open Telegram, something magical happens —  
-        <strong>Utya hatches from his little egg</strong> with a cheerful quack just to welcome you!  
-        With Utya by your side, every message starts with a smile and a splash of fun.
+      <div class="utya-info">
+        <div class="utya-info-text">
+          The very first time you open Telegram, something magical happens —  
+          <strong>Utya hatches from his little egg</strong> with a cheerful quack just to welcome you!  
+          With Utya by your side, every message starts with a smile and a splash of fun.
+        </div>
+        <div class="utya-lottie" data-src="/utya-egg.json"></div>
       </div>
-      <div class="utya-lottie" data-src="/utya-egg.json"></div>
-    </div>
 
-    <div class="utya-info">
-      <div class="utya-info-text">
-        When you’re about to invite your friends to Telegram, Utya is the first to crash the party!  
-        With his playful grin and friendly quack, he reminds everyone that the fun is about to begin.
+      <div class="utya-info">
+        <div class="utya-info-text">
+          When you’re about to invite your friends to Telegram, Utya is the first to crash the party!  
+          With his playful grin and friendly quack, he reminds everyone that the fun is about to begin.
+        </div>
+        <div class="utya-lottie" data-src="/utya-invite.json"></div>
       </div>
-      <div class="utya-lottie" data-src="/utya-invite.json"></div>
     </div>
   </div>
-</div>
+</section>
+
+<style>
+  .black-4-widget {
+    max-width: 1200px;
+    margin: 48px auto;
+    color: rgba(255, 213, 39, 1);
+    font-family: 'Fredoka One', cursive, sans-serif;
+    text-align: center;
+  }
+
+  .black-4-widget h2 {
+    font-size: 2rem;
+    margin-bottom: 8px;
+  }
+
+  .black-4-widget .subtitle {
+    font-size: 1.5rem;
+    color: white;
+    margin-bottom: 24px;
+  }
+
+  .card {
+    background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.05));
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 16px;
+    padding: 24px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    margin-top: 32px;
+    text-align: left;
+    user-select: none;
+  }
+
+  .card .intro-lottie {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    margin: 0 auto 16px auto;
+    border-radius: 16px;
+  }
+
+  .card-content {
+    font-size: 1.5rem;
+    font-weight: bold;
+    line-height: 1.6;
+    color: rgba(141, 82, 193, 1);
+    text-align: center;
+  }
+
+  .utya-info {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-top: 48px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+    font-size: 1.1rem;
+    color: #eee;
+  }
+
+  .utya-info-text {
+    flex: 1;
+    font-family: 'Fredoka One', cursive, sans-serif;
+    font-weight: 500;
+  }
+
+  .utya-lottie {
+    width: 10rem;
+    height: 10rem;
+    border-radius: 16px;
+  }
+
+  @media (max-width: 768px) {
+    .black-4-widget h2 {
+      font-size: 1.5rem;
+    }
+    .utya-info {
+      flex-direction: column;
+      text-align: center;
+    }
+    .utya-lottie {
+      width: 80%;
+      max-width: 300px;
+      height: auto;
+      margin-bottom: 24px;
+    }
+  }
+</style>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.10.2/lottie.min.js"></script>
 <script>

@@ -125,12 +125,26 @@ window.addEventListener('DOMContentLoaded', () => {
     scrollEl.scrollLeft = scrollLeft - (x - startX) * 1.5;
   });
 
-  // Wheel scroll for desktop
-  scrollEl.addEventListener('wheel', e => {
-    if (window.innerWidth >= 768 && Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-      e.preventDefault();
-      scrollEl.scrollLeft += e.deltaY * 1.2;
+// Wheel scroll handling for #utya-friend-scroll
+scrollEl.addEventListener('wheel', (e) => {
+  const isVerticalScroll = Math.abs(e.deltaY) > Math.abs(e.deltaX);
+  if (window.innerWidth >= 768 && isVerticalScroll) {
+    const atStart = scrollEl.scrollLeft === 0;
+    const atEnd = scrollEl.scrollLeft + scrollEl.clientWidth >= scrollEl.scrollWidth - 1;
+
+    const scrollingRight = e.deltaY > 0;
+    const scrollingLeft = e.deltaY < 0;
+
+    if ((scrollingRight && atEnd) || (scrollingLeft && atStart)) {
+      // Let normal vertical scroll happen
+      return;
     }
-  }, { passive: false });
+
+    // Otherwise, scroll horizontally and prevent vertical scroll
+    e.preventDefault();
+    scrollEl.scrollLeft += e.deltaY * 1.2;
+  }
+}, { passive: false });
+
 });
 </script>

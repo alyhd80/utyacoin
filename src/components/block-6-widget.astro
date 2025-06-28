@@ -11,15 +11,16 @@
   font-family: 'Fredoka One', cursive, sans-serif;
   padding-bottom: 40px;
 ">
-<h2 style="font-size: 44px; margin-bottom: 16px; font-weight: 900; letter-spacing: 1.5px; padding: 0 40px;">
-  Meet the Legendary UTYA NFT Collection
-</h2>
+  <h2 style="font-size: 44px; margin-bottom: 16px; font-weight: 900; letter-spacing: 1.5px; padding: 0 40px;">
+    Meet the Legendary UTYA NFT Collection
+  </h2>
 
-<p style="font-size: 18px; max-width: 860px; margin: 0 auto 40px auto; line-height: 1.7; color: #FFD700; padding: 0 40px;">
-  From viral Telegram stickers to collectible on-chain assets — the UTYA NFTs are not just art, they're a movement. Dive into the most iconic ducks of the blockchain, hand-drawn and community-loved.
-</p>
+  <p style="font-size: 18px; max-width: 860px; margin: 0 auto 40px auto; line-height: 1.6; color: #FFD700; padding: 0 40px;">
+    UTYA NFTs started as viral Telegram stickers and now are unique collectible assets on the blockchain.
+  </p>
 
   <div id="nft-scroll">
+    <!-- NFT cards -->
     <div class="nft-card" data-lottie-src="/nft-1.json"></div>
     <div class="nft-card" data-lottie-src="/nft-2.json"></div>
     <div class="nft-card" data-lottie-src="/nft-3.json"></div>
@@ -32,11 +33,17 @@
     <div class="nft-card" data-lottie-src="/nft-10.json"></div>
     <div class="nft-card" data-lottie-src="/nft-11.json"></div>
     <div class="nft-card" data-lottie-src="/nft-12.json"></div>
-    <div class="nft-card" data-lottie-src="/nft-13.json"></div>
     <div class="nft-card" data-lottie-src="/nft-14.json"></div>
     <div class="nft-card" data-lottie-src="/nft-15.json"></div>
     <div class="nft-card" data-lottie-src="/nft-16.json"></div>
   </div>
+
+  <p id="utya-callout" style="padding-top: 40px; font-size: 18px; max-width: 860px; margin: 0 auto 16px auto; line-height: 1.6; color: #FFD700; padding-left: 40px; padding-right: 40px;">
+    Want to join the family? Buy a UTYA NFT and set it as your Telegram profile.
+  </p>
+
+  <!-- این div همیشه نمایش داده میشه ولی فقط در خارج از دید انیمیشنش پخش میشه -->
+  <div id="utya-lottie-hidden"></div>
 </div>
 
 <style>
@@ -49,7 +56,6 @@
   -webkit-overflow-scrolling: touch;
   cursor: grab;
   user-select: none;
-
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
@@ -60,7 +66,6 @@
 
 #nft-scroll.dragging {
   cursor: grabbing;
-  user-select: none;
 }
 
 .nft-card {
@@ -72,21 +77,23 @@
   scroll-snap-align: center;
   background: transparent;
 }
+
+#utya-lottie-hidden {
+  width: 80px;
+  height: 80px;
+  margin: 16px auto 32px auto;
+  pointer-events: none;
+}
 </style>
 
-<!-- اضافه کردن لایبری Lottie -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.10.2/lottie.min.js"></script>
-
 <script>
-// مدیریت انیمیشن‌های Lottie با IntersectionObserver
-
 const lottieCards = document.querySelectorAll('.nft-card');
 const lottiePlayers = new Map();
 
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     const el = entry.target;
-
     if (entry.isIntersecting) {
       if (!lottiePlayers.has(el)) {
         const animation = lottie.loadAnimation({
@@ -110,17 +117,22 @@ const observer = new IntersectionObserver((entries) => {
 
 lottieCards.forEach(card => observer.observe(card));
 
-// اسکرول افقی با چرخ موس برای دسکتاپ
 const scrollContainer = document.getElementById('nft-scroll');
 
 scrollContainer.addEventListener('wheel', function (e) {
   if (window.innerWidth >= 768 && Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-    e.preventDefault();
+    const atStart = scrollContainer.scrollLeft <= 0;
+    const atEnd = scrollContainer.scrollLeft + scrollContainer.offsetWidth >= scrollContainer.scrollWidth - 1;
+
+    if ((e.deltaY < 0 && atStart) || (e.deltaY > 0 && atEnd)) {
+      return;
+    }
+
+    e.preventDefault(); 
     scrollContainer.scrollLeft += e.deltaY * 1.2;
   }
 }, { passive: false });
 
-// درگ برای اسکرول
 let isDown = false;
 let startX;
 let scrollLeft;
@@ -146,4 +158,27 @@ scrollContainer.addEventListener('mousemove', (e) => {
   const walk = (x - startX) * 1.5;
   scrollContainer.scrollLeft = scrollLeft - walk;
 });
+
+// Hidden Lottie animation logic
+const hintContainer = document.getElementById('utya-lottie-hidden');
+const calloutText = document.getElementById('utya-callout');
+let hintPlayer = lottie.loadAnimation({
+  container: hintContainer,
+  renderer: 'svg',
+  loop: true,
+  autoplay: false,
+  path: '/utya-set-nft.json'
+});
+
+const hintObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      hintPlayer.play();
+    } else {
+      hintPlayer.pause();
+    }
+  });
+}, { threshold: 0.2 });
+
+hintObserver.observe(calloutText);
 </script>

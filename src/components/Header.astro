@@ -1,17 +1,13 @@
----
-// بدون اسکریپت!
----
-
 <header id="main-header">
   <div class="header-left">UTYA</div>
   <div class="header-center">
-    <!-- <a href="#block1">Block1</a>
-    <a href="#block2">Block2</a>
-    <a href="#block3">Block3</a> -->
+    <a href="#about">About</a>
+    <a href="#how-to-buy">How to Buy</a>
+    <a href="#socials">Socials</a>
   </div>
-<div class="header-right">
-  <!-- <a href="https://app.ston.fi/swap?chartVisible=false&ft=TON&tt=UTYA" target="_blank" rel="noopener noreferrer">Buy on Stonfi</a> -->
-</div>
+  <div class="header-right">
+    <!-- <a href="https://app.ston.fi/swap?chartVisible=false&ft=TON&tt=UTYA" target="_blank" rel="noopener noreferrer">Buy on Stonfi</a> -->
+  </div>
   <style>
     #main-header {
       top: 0;
@@ -19,7 +15,7 @@
       width: 100%;
       height: 60px;
       color: white;
-        font-family: 'Fredoka One', cursive, sans-serif;
+      font-family: 'Fredoka One', cursive, sans-serif;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -47,42 +43,9 @@
     }
 
     .header-left,
-    .header-center,
- {
+    .header-center {
       display: flex;
       align-items: center;
-    }
-
-
-
-.header-right a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 18px;
-  cursor: pointer;
-  transition: 
-    transform 0.3s ease, 
-    background-color 0.3s ease;
-  padding: 8px 14px;
-  border-radius: 8px;
-}
-
-.header-right a:hover {
-  transform: scale(1.02); 
-    color: white;
-  background-color: rgba(255, 213, 39, 1);;
-}
-
-
-    .header-left {
-      font-weight: bold;
-      font-size: 30px;
-    color: rgba(255, 213, 39, 1);
-
     }
 
     .header-center a {
@@ -94,20 +57,55 @@
       font-size: 18px;
     }
 
- .header-right {
-  font-weight: 600;
-  font-size: 18px;
-  cursor: pointer;
-  transition: 
-    transform 0.3s ease, 
-    background-color 0.3s ease;
-  padding: 8px 14px;
-  border-radius: 8px;
-}
+    .header-right a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 18px;
+      cursor: pointer;
+      transition:
+        transform 0.3s ease,
+        background-color 0.3s ease;
+      padding: 8px 14px;
+      border-radius: 8px;
+    }
 
-.header-right:hover {
-  transform: scale(1.12);
-  background-color:rgba(255, 213, 39, 1);
-}
+    .header-right a:hover {
+      transform: scale(1.02);
+      color: white;
+      background-color: rgba(255, 213, 39, 1);
+    }
+
+    .header-left {
+      font-weight: bold;
+      font-size: 30px;
+      color: rgba(255, 213, 39, 1);
+    }
+
+    .header-right {
+      font-weight: 600;
+      font-size: 18px;
+      cursor: pointer;
+      transition:
+        transform 0.3s ease,
+        background-color 0.3s ease;
+      padding: 8px 14px;
+      border-radius: 8px;
+    }
+
+    .header-right:hover {
+      transform: scale(1.12);
+      background-color: rgba(255, 213, 39, 1);
+    }
+
+    /* مخفی کردن تب‌ها در موبایل */
+    @media (max-width: 420px) {
+      .header-center {
+        display: none;
+      }
+    }
   </style>
 </header>
