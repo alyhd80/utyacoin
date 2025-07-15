@@ -24,7 +24,7 @@ const blocks = [
   { id: 5, Component: Block5Widget },
   { id: 6, Component: Block6Widget },
   { id: 7, Component: Block7Widget },
-  { id: 8, Component: Block8Widget },
+  // { id: 8, Component: Block8Widget },
   { id: 9, Component: Block9Widget },
   { id: 10, Component: Block10Widget }, 
   { id: 11, Component: Block11Widget },
@@ -87,7 +87,7 @@ body.background-alt {
         content: "";
         position: fixed;
         inset: 0;
-        background-color: rgba(0, 160, 217, 0.5);
+        background-color: rgba(0, 160, 217, 0.75);
         z-index: -1;
         transition: background-color 1s ease-in-out;
       }
@@ -226,7 +226,7 @@ body.background-alt {
             header.classList.add('visible');
             lottieLoading.destroy();
           }, { once: true });
-        }, 0);
+        }, 1000);
       });
 
       // Ripple effect
@@ -242,7 +242,7 @@ body.background-alt {
       window.addEventListener("resize", resizeCanvas);
 
       let lastRipple = 0;
-      const interval = 100;
+      const interval = 250;
 
       document.addEventListener("mousemove", (e) => {
         const now = Date.now();
@@ -256,7 +256,7 @@ body.background-alt {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         for (let i = ripples.length - 1; i >= 0; i--) {
           const r = ripples[i];
-          r.radius += 1;
+          r.radius += 0.8;
           r.alpha -= 0.002;
           if (r.alpha <= 0) {
             ripples.splice(i, 1);
@@ -307,9 +307,9 @@ body.background-alt {
       observeBlocksManually();
 
       // Disable right-click (Context menu) - Added as requested
-      // document.addEventListener("contextmenu", (e) => {
-      //   e.preventDefault();
-      // });
+      document.addEventListener("contextmenu", (e) => {
+        e.preventDefault();
+      });
 
 
 

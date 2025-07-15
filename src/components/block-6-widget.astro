@@ -11,13 +11,14 @@
   font-family: 'Fredoka One', cursive, sans-serif;
   padding-bottom: 40px;
 ">
-  <h2 style="font-size: 44px; margin-bottom: 16px; font-weight: 900; letter-spacing: 1.5px; padding: 0 40px;">
-    Meet the Legendary UTYA NFT Collection
-  </h2>
+<h2 style="font-size: 44px; margin-bottom: 16px; font-weight: 900; letter-spacing: 1.5px; padding: 0 40px;">
+  UTYA NFTs: Flex Like a Legend
+</h2>
 
-  <p style="font-size: 18px; max-width: 860px; margin: 0 auto 40px auto; line-height: 1.6; color: #FFD700; padding: 0 40px;">
-    UTYA NFTs started as viral Telegram stickers and now are unique collectible assets on the blockchain.
-  </p>
+<p style="font-size: 18px; max-width: 860px; margin: 0 auto 40px auto; line-height: 1.6; color: #FFD700; padding: 0 40px;">
+  Stickers went NFT. Utya’s got looks, moods, and pure meme energy. Collect the drip. Flex the duck.
+</p>
+
 
   <div id="nft-scroll">
     <!-- NFT cards -->
@@ -38,9 +39,10 @@
     <div class="nft-card" data-lottie-src="/nft-16.json"></div>
   </div>
 
-  <p id="utya-callout" style="padding-top: 40px; font-size: 18px; max-width: 860px; margin: 0 auto 16px auto; line-height: 1.6; color: #FFD700; padding-left: 40px; padding-right: 40px;">
-    Want to join the family? Buy a UTYA NFT and set it as your Telegram profile.
-  </p>
+<p id="utya-callout" style="padding-top: 40px; font-size: 18px; max-width: 860px; margin: 0 auto 16px auto; line-height: 1.6; color: #FFD700; padding-left: 40px; padding-right: 40px;">
+  Want real Telegram drip? Utya NFT, your chat your rules.
+</p>
+
 
   <!-- این div همیشه نمایش داده میشه ولی فقط در خارج از دید انیمیشنش پخش میشه -->
   <div id="utya-lottie-hidden"></div>
@@ -117,9 +119,11 @@ const observer = new IntersectionObserver((entries) => {
 
 lottieCards.forEach(card => observer.observe(card));
 
+// تغییرات اصلی اینجا اعمال شده:
+const widgetContainer = document.getElementById('utya-nft-section');
 const scrollContainer = document.getElementById('nft-scroll');
 
-scrollContainer.addEventListener('wheel', function (e) {
+widgetContainer.addEventListener('wheel', function (e) {
   if (window.innerWidth >= 768 && Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
     const atStart = scrollContainer.scrollLeft <= 0;
     const atEnd = scrollContainer.scrollLeft + scrollContainer.offsetWidth >= scrollContainer.scrollWidth - 1;
@@ -137,21 +141,24 @@ let isDown = false;
 let startX;
 let scrollLeft;
 
-scrollContainer.addEventListener('mousedown', (e) => {
+widgetContainer.addEventListener('mousedown', (e) => {
   isDown = true;
   scrollContainer.classList.add('dragging');
   startX = e.pageX - scrollContainer.offsetLeft;
   scrollLeft = scrollContainer.scrollLeft;
 });
-scrollContainer.addEventListener('mouseleave', () => {
+
+widgetContainer.addEventListener('mouseleave', () => {
   isDown = false;
   scrollContainer.classList.remove('dragging');
 });
-scrollContainer.addEventListener('mouseup', () => {
+
+widgetContainer.addEventListener('mouseup', () => {
   isDown = false;
   scrollContainer.classList.remove('dragging');
 });
-scrollContainer.addEventListener('mousemove', (e) => {
+
+widgetContainer.addEventListener('mousemove', (e) => {
   if (!isDown) return;
   e.preventDefault();
   const x = e.pageX - scrollContainer.offsetLeft;

@@ -1,5 +1,28 @@
+<!-- Styles for Official UTYA Token buttons -->
+<style>
+  #utya-token-section a.glass-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+    backdrop-filter: blur(12px);
+  }
+
+  #utya-token-section a.glass-btn:hover {
+    transform: scale(1.05);
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+</style>
+
 <!-- Official UTYA Token Section -->
-<div style="
+<div id="utya-token-section" style="
   backdrop-filter: blur(12px);
   background: rgba(255, 255, 255, 0.12);
   border: 1px solid rgba(255, 255, 255, 0.25);
@@ -30,47 +53,31 @@
 
   <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 16px;">
     <a 
-      onclick="navigator.clipboard.writeText('EQBaCgUwOoc6gHCNln_oJzb0mVs79YG7wYoavh-o1ItaneLA').then(() => document.getElementById('utyaSound').play())"
-      style="
-        padding: 10px 20px;
-        font-size: 16px;
-        border: none;
-        border-radius: 10px;
-        background: white;
-        color: #0ca0d9;
-        cursor: pointer;
-      "
+      class="glass-btn"
+      onclick="navigator.clipboard.writeText('EQBaCgUwOoc6gHCNln_oJzb0mVs79YG7wYoavh-o1ItaneLA').then(() => document.getElementById('utyaSound').currentTime=0) .then(() => document.getElementById('utyaSound').play())"
     >
       📋 Copy
     </a>
 
     <a 
+      class="glass-btn"
       href="javascript:void(0);" 
-      onclick="document.getElementById('utyaSound').currentTime=0; document.getElementById('utyaSound').play(); window.open('https://tonviewer.com/EQBaCgUwOoc6gHCNln_oJzb0mVs79YG7wYoavh-o1ItaneLA', '_blank', 'noopener');" 
-      style="
-        padding: 10px 20px;
-        font-size: 16px;
-        border-radius: 10px;
-        background: white;
-        color: #0ca0d9;
-        text-decoration: none;
-        cursor: pointer;
+      onclick="
+        document.getElementById('utyaSound').currentTime=0;
+        document.getElementById('utyaSound').play();
+        window.open('https://tonviewer.com/EQBaCgUwOoc6gHCNln_oJzb0mVs79YG7wYoavh-o1ItaneLA','_blank','noopener');
       "
     >
       🔍 View on TON Viewer
     </a>
 
     <a 
+      class="glass-btn"
       href="javascript:void(0);" 
-      onclick="document.getElementById('utyaSound').currentTime=0; document.getElementById('utyaSound').play(); window.open('https://dexscreener.com/ton/EQBaCgUwOoc6gHCNln_oJzb0mVs79YG7wYoavh-o1ItaneLA', '_blank', 'noopener');" 
-      style="
-        padding: 10px 20px;
-        font-size: 16px;
-        border-radius: 10px;
-        background: white;
-        color: #0ca0d9;
-        text-decoration: none;
-        cursor: pointer;
+      onclick="
+        document.getElementById('utyaSound').currentTime=0;
+        document.getElementById('utyaSound').play();
+        window.open('https://dexscreener.com/ton/EQBaCgUwOoc6gHCNln_oJzb0mVs79YG7wYoavh-o1ItaneLA','_blank','noopener');
       "
     >
       📈 DEXScreener Chart
@@ -78,6 +85,7 @@
   </div>
 </div>
 
+<!-- Audio -->
 <audio id="utyaSound" src="/utya-sound.mp3" preload="auto"></audio>
 
 <!-- Lottie Web Animation -->
